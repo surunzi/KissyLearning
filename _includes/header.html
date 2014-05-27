@@ -2,7 +2,11 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Kissy Learing</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Kissy Learning</title>
+    {% if page.index %}
+        <link rel="stylesheet" href="css/style.css">
+    {% else %}
+        <link rel="stylesheet" href="../css/style.css">
+    {% endif %}
 </head>
 <body>

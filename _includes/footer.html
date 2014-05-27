@@ -3,5 +3,14 @@
         <span class="copyright">&copy; Kissy Learning 2014</span>
     </div>
 </div>
+
+{% if page.index %}
+    <script src="js/kissy/seed-min.js"></script>
+    <script src="js/KissyLearning.js"></script>
+{% else %}
+    <script src="../js/kissy/seed-min.js"></script>
+    <script src="../js/KissyLearning.js"></script>
+{% endif %}
+
 </body>
 </html>
