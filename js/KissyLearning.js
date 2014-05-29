@@ -1,14 +1,24 @@
 KISSY.use(['node'], function (S, Node) {
 
-var $page = Node.one('#page'),
-    features = $page.attr('data-feature').split(','),
+var $page, 
+    features,
     i, len, temp;
 
-temp = {};
-for (i = 0, len = features.length; i < len; i++) {
-    temp[features[i]] = true;
+$page = Node.one('#page');
+if ($page) {
+    features = $page.attr('data-feature');
 }
-features = temp;
+
+if (features) {
+    features = features.split(',')
+    temp = {};
+    for (i = 0, len = features.length; i < len; i++) {
+        temp[features[i]] = true;
+    }
+    features = temp;
+} else {
+    features = {};
+}
 
 // 主页图标说明弹出
 if (features['homeIconInfo']) {
