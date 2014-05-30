@@ -172,6 +172,10 @@ ul {
     color: #fff;
 }
 
+#index-disqus-container {
+    margin: 15px auto;
+}
+
 #intro {
     padding-top: 30px;
     padding-bottom: 20px;
@@ -232,6 +236,11 @@ ul {
 
 #post .article {
     padding: 20px 15px;
+}
+
+#post-disqus-container {
+    padding: 0 15px;
+    margin: 15px 0;
 }
 
 #post-list {
