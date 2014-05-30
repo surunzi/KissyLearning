@@ -3,8 +3,8 @@
   <channel>
     <title>Your awesome title</title>
     <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</description>
-    <link>http://surunzi.github.io/KissyLearning//</link>
-    <atom:link href="http://surunzi.github.io/KissyLearning//feed.xml" rel="self" type="application/rss+xml" />
+    <link>http://surunzi.github.io/KissyLearning/</link>
+    <atom:link href="http://surunzi.github.io/KissyLearning/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
         <title>初窥Kissy源码结构</title>
@@ -71,8 +71,8 @@
 &lt;p&gt;说笑的，求不挂就行(T＿T)&lt;/p&gt;
 </description>
         <pubDate>Thu, 29 May 2014 00:00:00 +0800</pubDate>
-        <link>http://surunzi.github.io/KissyLearning//learning-notes/2014/05/29/kissy-source-first-impression/</link>
-        <guid isPermaLink="true">http://surunzi.github.io/KissyLearning//learning-notes/2014/05/29/kissy-source-first-impression/</guid>
+        <link>http://surunzi.github.io/KissyLearning/learning-notes/2014/05/29/kissy-source-first-impression/</link>
+        <guid isPermaLink="true">http://surunzi.github.io/KissyLearning/learning-notes/2014/05/29/kissy-source-first-impression/</guid>
       </item>
     
   </channel>
