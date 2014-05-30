@@ -48,6 +48,12 @@ ul {
     font-size: 14px;
 }
 
+.article h1,
+.article h2,
+.article h3 {
+    font-weight: normal;
+}
+
 .article > p {
     font-size: 16px;
     line-height: 1.5em;
