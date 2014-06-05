@@ -3,8 +3,8 @@
   <channel>
     <title>Your awesome title</title>
     <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</description>
-    <link>http://surunzi.github.io/KissyLearning/</link>
-    <atom:link href="http://surunzi.github.io/KissyLearning/feed.xml" rel="self" type="application/rss+xml" />
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
         <title>jQuery用户快速上手Kissy</title>
@@ -31,9 +31,7 @@
 &lt;pre&gt;&lt;code&gt;$(document).ready(function () {
     /* jQuery代码 */
 });
-
-或者
-
+// 或者
 $(function () {
     /* jQuery代码 */ 
 });
@@ -69,8 +67,8 @@ S.ready(function (S) {
 &lt;p&gt;最后说一点，本文只是用一种抖机灵的方式让使用jQuery的人能像用jQuery一样来使用Kissy，还是强烈建议去查看下Kissy的&lt;a href=&quot;http://docs.kissyui.com/1.4/docs/html/guideline/kmd.html&quot;&gt;模块化规范&lt;/a&gt;。毕竟，模块化才是Kissy相比于jQuery真正所具有的优势，至少在我看来是这样的。使用Kissy，你可以很方便地创建和管理自己的模块，得到类似使用requireJs管理模块依赖库所带来的好处，让开发过程变得更加简单高效，代码的可维护性更高。&lt;/p&gt;
 </description>
         <pubDate>Fri, 30 May 2014 00:00:00 +0800</pubDate>
-        <link>http://surunzi.github.io/KissyLearning/basic-tutorial/2014/05/30/tutorial-for-jquery-user/</link>
-        <guid isPermaLink="true">http://surunzi.github.io/KissyLearning/basic-tutorial/2014/05/30/tutorial-for-jquery-user/</guid>
+        <link>http://localhost:4000/basic-tutorial/2014/05/30/tutorial-for-jquery-user/</link>
+        <guid isPermaLink="true">http://localhost:4000/basic-tutorial/2014/05/30/tutorial-for-jquery-user/</guid>
       </item>
     
       <item>
@@ -138,8 +136,8 @@ S.ready(function (S) {
 &lt;p&gt;说笑的，求不挂就行(T＿T)&lt;/p&gt;
 </description>
         <pubDate>Thu, 29 May 2014 00:00:00 +0800</pubDate>
-        <link>http://surunzi.github.io/KissyLearning/learning-notes/2014/05/29/kissy-source-first-impression/</link>
-        <guid isPermaLink="true">http://surunzi.github.io/KissyLearning/learning-notes/2014/05/29/kissy-source-first-impression/</guid>
+        <link>http://localhost:4000/learning-notes/2014/05/29/kissy-source-first-impression/</link>
+        <guid isPermaLink="true">http://localhost:4000/learning-notes/2014/05/29/kissy-source-first-impression/</guid>
       </item>
     
   </channel>
