@@ -42,18 +42,18 @@ ul {
 
 .article code {
     display: block;
-    background-color: #f9f9f9;
-    padding: 4px 8px;
-    color: #09c;
-    font-size: 14px;
+    background-color: #202020;
+    padding: 8px;
+    color: #e2e2e5;
+    font-size: 16px;
 }
 
 .article code .com {
-    color: #aad722;
+    color: #7e8aa2;
 }
 
 .article code .str, .article code .atv{
-    color: #fe5050;
+    color: #1abc9c;
 }
 
 .article h1,
