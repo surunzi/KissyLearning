@@ -1,6 +1,8 @@
 {% include header.html %}
 {% include nav.html %}
 
+<div id="page" data-feature="prettify"></div>
+
 <div id="post" class="container">
     <div class="article">
         <h2 class="title">{{ page.title }}</h2>
@@ -20,5 +22,6 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 })();
 </script>
+<script src="{{ site.url }}/js/prettify/prettify.js"></script>
 
 {% include footer.html %}

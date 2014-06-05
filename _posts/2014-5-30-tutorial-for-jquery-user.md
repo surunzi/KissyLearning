@@ -23,9 +23,7 @@ jQuery:
     $(document).ready(function () {
         /* jQuery代码 */
     });
-
-    或者
-
+    // 或者
     $(function () {
         /* jQuery代码 */ 
     });
