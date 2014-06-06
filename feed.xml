@@ -7,6 +7,130 @@
     <atom:link href="http://surunzi.github.io/KissyLearning/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Kissy模块加载器基础用法</title>
+        <description>&lt;p&gt;Javascript模块化可以为我们带来代码复用、提高可维护性、按需加载文件等好处。目前比较流行的模块加载器有RequireJs和SeaJs。如果你正在使用Kissy库的话，就无需另外再去引入这些加载器，因为Kissy本身就是一个模块化的Javascript框架。本文将从一个实例出发说明Kissy模块化的基本使用方法，最终的效果可戳&lt;a href=&quot;http://surunzi.github.io/KissyLearning/example/module/&quot;&gt;此处&lt;/a&gt;进行查看。你也可以戳&lt;a href=&quot;https://github.com/surunzi/KissyLearning/tree/master/example/module&quot;&gt;此处&lt;/a&gt;查看所有的源代码。&lt;/p&gt;
+
+&lt;p&gt;首先建立HTML文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;...
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+    &amp;lt;div id=&quot;title&quot;&amp;gt;
+        &amp;lt;h1&amp;gt;模块按需加载&amp;lt;/h1&amp;gt;
+        &amp;lt;span&amp;gt;请点击下面的按钮并同时查看网络请求情况&amp;lt;/span&amp;gt;
+    &amp;lt;/div&amp;gt;
+    &amp;lt;div id=&quot;btn-wrapper&quot;&amp;gt;
+        &amp;lt;div id=&quot;btn&quot;&amp;gt;点我加载模块并执行&amp;lt;/div&amp;gt;
+    &amp;lt;/div&amp;gt;
+    &amp;lt;script src=&quot;http://g.tbcdn.cn/kissy/k/1.4.3/seed.js&quot; data-combine=&quot;{combine:true}&quot;&amp;gt;&amp;lt;/script&amp;gt;
+    &amp;lt;script src=&quot;effect.js&quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Kissy中添加模块的步骤如下：&lt;/p&gt;
+
+&lt;p&gt;1.新建一个js文件，在其中添加如下的结构：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;KISSY.add(function (S, Node) {
+    /* 模块代码 */
+    return;
+    /* 最后可以返回结果供调用该模块的文件使用 */
+}, {
+    requires: [&#39;node&#39;] /* 可以加载多个该模块所依赖的模块，与函数的参数一一对应*/
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;比如我们这次例子的结构是以下这样的：&lt;/p&gt;
+
+&lt;p&gt;snow.js&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;KISSY.add(function (S, Node) {
+    /* 变量定义 */
+    var ...;
+    // 初始化
+    function init() {
+    }
+    // 开始执行动画
+    function begin() {
+    }
+    // 绘制
+    function draw() {
+    }
+    // 粒子构造函数
+    function Particle() {
+    }
+    // 停止动画
+    function stop() {
+    }
+    /* 将begin和stop方法返回供调用该模块的文件使用 */
+    return {
+        begin: begin,
+        stop: stop
+    };
+}, {
+    requires: [&#39;node&#39;]
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;2.配置包&lt;/p&gt;
+
+&lt;p&gt;由于我们使用的是淘宝CDN，如果不注册包的话发送文件请求是会以淘宝CDN的地址为前缀，所以必须注册包用来映射正确的URL地址。同时包也在指明请求合并中起作用，这里不属于本文讨论范围就不详谈了。&lt;/p&gt;
+
+&lt;p&gt;以这次为例子:&lt;/p&gt;
+
+&lt;p&gt;effect.js&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;KISSY.config(&#39;packages&#39;, {
+    &#39;myModule&#39;: {
+        base: window.location.href.replace(&#39;index.html&#39;, &#39;&#39;),
+        ignorePackageNameInUri: true
+    }
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其中base为包的url映射，可以把它当成单纯的字符串替换，例如：&lt;/p&gt;
+
+&lt;p&gt;指明要使用’myModule/snow’这个包，它会将myModule替换为base, 请求地址为：base + ‘snow.js’；&lt;/p&gt;
+
+&lt;p&gt;假如没有指定ignorePackageNameInUri为true，则请求地址为：base + ‘myModule/’ + ‘snow.js’。&lt;/p&gt;
+
+&lt;p&gt;3.使用模块&lt;/p&gt;
+
+&lt;p&gt;使用自定义模块就跟使用Kissy自带的模块一样简单，比如：&lt;/p&gt;
+
+&lt;p&gt;effect.js&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;KISSY.ready(function (S) {
+KISSY.use(&#39;node&#39;, function (S, Node) {
+    Node.one(&#39;#btn&#39;).on(&#39;click&#39;, function () {
+        /* 点击按钮时加载snow模块并执行 */
+        KISSY.use(&#39;myModule/snow&#39;, function (S, snow) {
+            snow.begin();
+        });
+    });
+});
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后，总结一下创建自定义模块的步骤：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;新建文件，并用KISSY.add创建模块&lt;/li&gt;
+  &lt;li&gt;如果有必要，注册模块所在包&lt;/li&gt;
+  &lt;li&gt;用KISSY.use加载使用模块&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;更多关于Kissy Loader的信息请戳&lt;a href=&quot;http://docs.kissyui.com/1.4/docs/html/guideline/kmd.html&quot;&gt;这里&lt;/a&gt;和&lt;a href=&quot;http://docs.kissyui.com/1.4/docs/html/tutorials/kissy/loader/index.html&quot;&gt;这里&lt;/a&gt;^_^&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Fri, 06 Jun 2014 00:00:00 +0800</pubDate>
+        <link>http://surunzi.github.io/KissyLearning/basic-tutorial/2014/06/06/basic-module-loader-usage/</link>
+        <guid isPermaLink="true">http://surunzi.github.io/KissyLearning/basic-tutorial/2014/06/06/basic-module-loader-usage/</guid>
+      </item>
+    
+      <item>
         <title>jQuery用户快速上手Kissy</title>
         <description>&lt;h3 id=&quot;section&quot;&gt;1. 引入库文件&lt;/h3&gt;
 

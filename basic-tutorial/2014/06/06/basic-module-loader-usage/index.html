@@ -1,0 +1,70 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Kissy模块加载器基础用法</title><link rel="stylesheet" href="http://surunzi.github.io/KissyLearning/css/style.css"></head><body><div id="nav"><ul><li><a href="http://docs.kissyui.com/">官网</a></li><li><a href="http://surunzi.github.io/KissyLearning/tutorial/">教程</a></li><li><a href="http://surunzi.github.io/KissyLearning/example/">示例</a></li><li><a href="http://docs.kissyui.com/1.4/docs/html/api/">文档</a></li><li><a href="http://surunzi.github.io/KissyLearning/tool/">工具</a></li><li><a href="http://gallery.kissyui.com/">组件</a></li><li><a href="https://github.com/kissyteam/kissy">GitHub</a></li></ul></div><div id="page" data-feature="prettify"></div><div id="post" class="container"><div class="article"><div class="cover"><img src="http://surunzi.github.io/KissyLearning/cover/basic-module-loader-usage.jpg"><h2 class="title">Kissy模块加载器基础用法</h2></div><p>Javascript模块化可以为我们带来代码复用、提高可维护性、按需加载文件等好处。目前比较流行的模块加载器有RequireJs和SeaJs。如果你正在使用Kissy库的话，就无需另外再去引入这些加载器，因为Kissy本身就是一个模块化的Javascript框架。本文将从一个实例出发说明Kissy模块化的基本使用方法，最终的效果可戳<a href="http://surunzi.github.io/KissyLearning/example/module/">此处</a>进行查看。你也可以戳<a href="https://github.com/surunzi/KissyLearning/tree/master/example/module">此处</a>查看所有的源代码。</p><p>首先建立HTML文件：</p><pre><code>...
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id="title"&gt;
+        &lt;h1&gt;模块按需加载&lt;/h1&gt;
+        &lt;span&gt;请点击下面的按钮并同时查看网络请求情况&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div id="btn-wrapper"&gt;
+        &lt;div id="btn"&gt;点我加载模块并执行&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script src="http://g.tbcdn.cn/kissy/k/1.4.3/seed.js" data-combine="{combine:true}"&gt;&lt;/script&gt;
+    &lt;script src="effect.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>Kissy中添加模块的步骤如下：</p><p>1.新建一个js文件，在其中添加如下的结构：</p><pre><code>KISSY.add(function (S, Node) {
+    /* 模块代码 */
+    return;
+    /* 最后可以返回结果供调用该模块的文件使用 */
+}, {
+    requires: ['node'] /* 可以加载多个该模块所依赖的模块，与函数的参数一一对应*/
+});
+</code></pre><p>比如我们这次例子的结构是以下这样的：</p><p>snow.js</p><pre><code>KISSY.add(function (S, Node) {
+    /* 变量定义 */
+    var ...;
+    // 初始化
+    function init() {
+    }
+    // 开始执行动画
+    function begin() {
+    }
+    // 绘制
+    function draw() {
+    }
+    // 粒子构造函数
+    function Particle() {
+    }
+    // 停止动画
+    function stop() {
+    }
+    /* 将begin和stop方法返回供调用该模块的文件使用 */
+    return {
+        begin: begin,
+        stop: stop
+    };
+}, {
+    requires: ['node']
+});
+</code></pre><p>2.配置包</p><p>由于我们使用的是淘宝CDN，如果不注册包的话发送文件请求是会以淘宝CDN的地址为前缀，所以必须注册包用来映射正确的URL地址。同时包也在指明请求合并中起作用，这里不属于本文讨论范围就不详谈了。</p><p>以这次为例子:</p><p>effect.js</p><pre><code>KISSY.config('packages', {
+    'myModule': {
+        base: window.location.href.replace('index.html', ''),
+        ignorePackageNameInUri: true
+    }
+});
+</code></pre><p>其中base为包的url映射，可以把它当成单纯的字符串替换，例如：</p><p>指明要使用’myModule/snow’这个包，它会将myModule替换为base, 请求地址为：base + ‘snow.js’；</p><p>假如没有指定ignorePackageNameInUri为true，则请求地址为：base + ‘myModule/’ + ‘snow.js’。</p><p>3.使用模块</p><p>使用自定义模块就跟使用Kissy自带的模块一样简单，比如：</p><p>effect.js</p><pre><code>KISSY.ready(function (S) {
+KISSY.use('node', function (S, Node) {
+    Node.one('#btn').on('click', function () {
+        /* 点击按钮时加载snow模块并执行 */
+        KISSY.use('myModule/snow', function (S, snow) {
+            snow.begin();
+        });
+    });
+});
+});
+</code></pre><p>最后，总结一下创建自定义模块的步骤：</p><ul><li>新建文件，并用KISSY.add创建模块</li><li>如果有必要，注册模块所在包</li><li>用KISSY.use加载使用模块</li></ul><blockquote><p>更多关于Kissy Loader的信息请戳<a href="http://docs.kissyui.com/1.4/docs/html/guideline/kmd.html">这里</a>和<a href="http://docs.kissyui.com/1.4/docs/html/tutorials/kissy/loader/index.html">这里</a>^_^</p></blockquote></div><div id="post-disqus-container"><div id="disqus_thread"></div></div></div><script type="text/javascript">var disqus_shortname = 'kissylearning';
+var disqus_url = 'http://surunzi.github.io/KissyLearning/basic-tutorial/2014/06/06/basic-module-loader-usage/';
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script src="http://surunzi.github.io/KissyLearning/js/prettify/prettify.js"></script><div id="footer" class="container"><div class="inner"><span class="copyright">&copy; Kissy Learning 2014</span></div></div><script src="http://surunzi.github.io/KissyLearning/js/kissy/seed-min.js"></script><script src="http://surunzi.github.io/KissyLearning/js/KissyLearning.js"></script></body></html>
