@@ -117,6 +117,44 @@ ul {
     color: #09c;
 }
 
+#example-list ul {
+    display: table;
+    padding: 0 15px;
+}
+
+#example-list li {
+    float: left;
+    position: relative;
+    margin-bottom: 25px;
+    height: 135px;
+}
+
+#example-list li:hover span {
+    line-height: 135px;
+}
+
+#example-list li.middle {
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+#example-list li img {
+    display: block;
+}
+
+#example-list li span {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    color: #fff;
+    font-size: 15px;
+    line-height: 35px;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: line-height 0.3s;
+}
+
 #features {
     display: table;
     padding: 15px 0;
