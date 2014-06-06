@@ -56,6 +56,21 @@ ul {
     color: #1abc9c;
 }
 
+.article ul {
+    padding-left: 0;
+    list-style: square inside;
+}
+
+.article ul li {
+    border: 1px solid #f9f9f9;
+    padding: 5px 15px;
+    font-size: 15px;
+}
+
+.article ul li:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
 .article h1,
 .article h2,
 .article h3 {
@@ -286,6 +301,20 @@ ul {
 
 #post .article {
     padding: 20px 15px;
+}
+
+#post .article .cover {
+    position: relative;
+}
+
+#post .article .cover h2 {
+    position: absolute;
+    left: 0;
+    bottom: 25px;
+    color: #fff;
+    font-size: 30px;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 #post-disqus-container {
