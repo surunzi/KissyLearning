@@ -7,6 +7,98 @@
     <atom:link href="http://surunzi.github.io/KissyLearning/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Loader模块add方法源码一览</title>
+        <description>&lt;p&gt;Kissy框架的模块加载器中最重要的就是add和use方法：add用于添加模块，use用于加载并使用模块。本文只介绍关于add方法的大概内部实现流程，use将在往后的学习笔记中介绍。&lt;/p&gt;
+
+&lt;p&gt;稍微了解过Kissy的话都应该知道，Kissy使用use方法加载外部模块时将发起http请求模块所在的js文件，而模块文件内均有一个add方法。js文件加载完毕之后便会执行该add方法。那么，add方法究竟做了什么呢？&lt;/p&gt;
+
+&lt;p&gt;loader/src/loader.js&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(function (S) {
+    var Loader = S.Loader,
+        ComboLoader = Loader.ComboLoader;
+    Utils.mix(S, {
+        add: function (name, factory, cfg) {
+            ComboLoader.add(name, factory, cfg, arguments.length);
+        }
+    });
+})(KISSY);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;将loader.js中必要的文件删除后，可以看到Kissy.add其实只是在ComboLoader.add之上做了一层封装。&lt;/p&gt;
+
+&lt;p&gt;loader/src/combo-loader.js&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(function (S, undefined) {
+    var Loader = S.Loader,
+        addModule = Utils.addModule;
+    ...
+    function ComboLoader(callback) {
+        ...
+    }
+    ...
+    ComboLoader.add = function (name, factory, config, argsLen) {
+        // KISSY.add(&#39;xx&#39;,[],function(){});
+        if (argsLen === 3 &amp;amp;&amp;amp; Utils.isArray(factory)) {
+            ...
+        }
+        // KISSY.add(function(){}), KISSY.add(&#39;a&#39;), KISSY.add(function(){},{requires:[]})
+        if (typeof name === &#39;function&#39; || argsLen === 1) {
+            ...
+            addModule(name, factory, config);
+        } else {
+            ...
+            addModule(name, factory, config);
+        }
+    };
+    ...
+    Loader.ComboLoader = ComboLoader;
+})(KISSY);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ComboLoader.add主要是对传入的参数进行了一些顺序处理，以适应不同的参数传递，最终调用的是Utils.addModule。&lt;/p&gt;
+
+&lt;p&gt;loader/src/utils.js&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(function (S) {
+    var Loader = S.Loader,
+        Env = S.Env,
+        mods = Env.mods;
+    ...
+    mix(Utils, {
+        ...
+        createModule: function (name, cfg) {
+            var module = mods[name];
+            ...
+            mods[name] = module = new Loader.Module(mix({
+                name: name
+            }, cfg));
+            return module;
+        },
+        addModule: function (name, factory, config) {
+            ...
+            Utils.createModule(name, mix({
+                name: name,
+                status: Loader.Status.LOADED,
+                factory: factory
+            }, config));
+        }
+    });
+})(KISSY);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Utils.addModule检测模块是否已被加载过后调用Utils.createModule。Utils.createModule最终创建Loader.Module实例并最终赋值到Kissy.Env.modes[name]中去。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Loader.Module构造函数在loader/src/data-structure.js中&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Sat, 07 Jun 2014 00:00:00 +0800</pubDate>
+        <link>http://surunzi.github.io/KissyLearning/learning-notes/2014/06/07/inside-the-add-method-of-kissy-loader/</link>
+        <guid isPermaLink="true">http://surunzi.github.io/KissyLearning/learning-notes/2014/06/07/inside-the-add-method-of-kissy-loader/</guid>
+      </item>
+    
+      <item>
         <title>Kissy模块加载器基础用法</title>
         <description>&lt;p&gt;Javascript模块化可以为我们带来代码复用、提高可维护性、按需加载文件等好处。目前比较流行的模块加载器有RequireJs和SeaJs。如果你正在使用Kissy库的话，就无需另外再去引入这些加载器，因为Kissy本身就是一个模块化的Javascript框架。本文将从一个实例出发说明Kissy模块化的基本使用方法，最终的效果可戳&lt;a href=&quot;http://surunzi.github.io/KissyLearning/example/module/&quot;&gt;此处&lt;/a&gt;进行查看。你也可以戳&lt;a href=&quot;https://github.com/surunzi/KissyLearning/tree/master/example/module&quot;&gt;此处&lt;/a&gt;查看所有的源代码。&lt;/p&gt;
 
