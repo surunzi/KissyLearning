@@ -5,7 +5,7 @@ category: basic-tutorial
 cover: basic-module-loader-usage
 ---
 
-Javascript模块化可以为我们带来代码复用、提高可维护性、按需加载文件等好处。目前比较流行的模块加载器有RequireJs和SeaJs。如果你正在使用Kissy库的话，就无需另外再去引入这些加载器，因为Kissy本身就是一个模块化的Javascript框架。本文将从一个实例出发说明Kissy模块化的基本使用方法，最终的效果可戳[此处](http://surunzi.github.io/KissyLearning/example/module/)进行查看。你也可以戳[此处](https://github.com/surunzi/KissyLearning/tree/master/example/module)查看所有的源代码。
+Javascript模块化可以为我们带来代码复用、提高可维护性、按需加载文件等好处。目前比较流行的模块加载器有RequireJs和SeaJs。如果你正在使用Kissy库的话，就无需另外再去引入这些加载器，因为Kissy本身就是一个模块化的Javascript框架。本文将从一个实例出发说明Kissy模块化的基本使用方法，最终的效果可戳[此处](http://surunzi.github.io/KissyLearning/example/module/)进行查看。你也可以戳[此处](https://github.com/surunzi/KissyLearning/tree/master/example/module/)查看所有的源代码。
 
 首先建立HTML文件：
 

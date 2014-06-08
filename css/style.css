@@ -56,6 +56,13 @@ ul {
     color: #1abc9c;
 }
 
+.article strong {
+    font-weight: normal;
+    padding: 0 5px;
+    background-color: #f9f9f9;
+    color: #09c;
+}
+
 .article ul {
     padding-left: 0;
     list-style: square inside;
