@@ -7,6 +7,61 @@
     <atom:link href="http://surunzi.github.io/KissyLearning/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>使用requirejs的define方法来添加模块</title>
+        <description>&lt;p&gt;记得之前在Kissy的官网上，有人建议将依赖模块的声明放到前面去，这样看起来会比较方便些。官网提供的解决方法是：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;KISSY.add(function(S, require){
+    var A = require(&#39;a&#39;);
+    var B = require(&#39;b&#39;);
+    var C = require(&#39;c&#39;);
+    // Your code...
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果觉得对这种解决方法不满意的话，我们也可以自行解决，方法就是在KISSY.add方法上再套上一层将参数位置颠倒，比如下面：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(function (S) {
+    window.define = S.define = function (deps, callback) {
+        var slice = Array.prototype.slice;
+            
+        if (arguments.length === 1) {
+            S.add(deps);
+            return;
+        }
+        
+        S.add(function () {
+            return callback.apply(null, slice.apply(arguments, [1]));
+        }, {
+            requires: deps
+        });
+    }
+})(KISSY);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;将这段代码紧贴在Kissy库后面，就可以用requireJs的方法来添加模块了，比如下面：&lt;/p&gt;
+
+&lt;p&gt;module-A.js&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;define([&#39;node&#39;, &#39;base&#39;], function (Node, Base) {
+    ...
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;或者是下面这样：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;define(function () {
+    ...
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当然这段代码很粗糙，并没有做太多处理，你可以根据自己的实际需要再对其进行定制修改。。&lt;/p&gt;
+</description>
+        <pubDate>Mon, 09 Jun 2014 00:00:00 +0800</pubDate>
+        <link>http://surunzi.github.io/KissyLearning/basic-tutorial/2014/06/09/use-requirejs-style-to-add-module/</link>
+        <guid isPermaLink="true">http://surunzi.github.io/KissyLearning/basic-tutorial/2014/06/09/use-requirejs-style-to-add-module/</guid>
+      </item>
+    
+      <item>
         <title>使用Base模块实现类的创建和继承</title>
         <description>&lt;p&gt;大型JavaScript应用程序除了需要将程序进行拆分模块化之外，通常也是免不了要使用&lt;strong&gt;类&lt;/strong&gt;这种在其它多数编程语言中极为常用的结构体，这其中要以Java，C#最为典型。JavaScript中并没有真正的类，但我们仍可以通过构造函数和new运算符来模拟出传统的类，并利用它来更好地组织代码结构，提高其可维护性。&lt;/p&gt;
 
