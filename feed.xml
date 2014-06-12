@@ -7,6 +7,44 @@
     <atom:link href="http://surunzi.github.io/KissyLearning/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Kissy快速入门</title>
+        <description>&lt;h3 id=&quot;section&quot;&gt;什么是模块化？&lt;/h3&gt;
+
+&lt;p&gt;Kissy使用模块化开发，简单来说，就是将Kissy划分成多个部分，每个部分包含若干相似的功能。在开发过程中，需要用到哪一部分功能就需要载入相应的模块。需要进行DOM操作，就载入dom或者node模块；需要进行ajax操作，就载入io模块；需要进行cookie操作，就载入cookie模块，依此类推。&lt;/p&gt;
+
+&lt;h3 id=&quot;kissy&quot;&gt;载入Kissy库&lt;/h3&gt;
+
+&lt;p&gt;在使用Kissy库之前，必须将Kissy引入到你的页面中去，只需要在HTML页面中插入以下代码即可：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;script src=&quot;http://g.tbcdn.cn/kissy/k/1.4.3/seed.js&quot; data-config=&quot;{combine:true}&quot;&amp;gt;&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;seed.js文件只是一个模块加载器，并没有包含所有的Kissy文件。当你需要用到某些模块时，该加载器会动态加载所需要的文件。因此，如果是本地调试，不能单独将seed.js文件下载下来，必须下载整个Kissy库，当前最新的1.4.3版可戳&lt;a href=&quot;https://github.com/kissyteam/kissy/archive/v1.4.3.zip&quot;&gt;此处&lt;/a&gt;下载。&lt;/p&gt;
+
+&lt;h3 id=&quot;kissyuse&quot;&gt;Kissy.use&lt;/h3&gt;
+
+&lt;p&gt;在Kissy中加载各模块使用use方法，该方法挂载在Kissy对象上：&lt;strong&gt;KISSY.use(name,sandbox)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;其中name为数组，指明需要使用的模块，sandbox为匿名函数，第一个参数为S，传入KISSY全局对象，其他参数依次带入所载入的模块返回的对象。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;KISSY.use([&#39;node&#39;, &#39;io&#39;], function (S, Node, io) {
+    var ele = Node.one(&#39;#ele&#39;);
+    ...
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;学习资料&lt;/h3&gt;
+
+&lt;p&gt;进一步学习可前往：&lt;a href=&quot;http://surunzi.github.io/KissyLearning/tutorial/&quot;&gt;教程&lt;/a&gt;、&lt;a href=&quot;http://docs.kissyui.com/&quot;&gt;官网&lt;/a&gt;、&lt;a href=&quot;http://surunzi.github.io/KissyLearning/document/&quot;&gt;文档&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;如果有好的关于Kissy的学习资料，请发送邮件给我：&lt;strong&gt;surunzi1992@gmail.com&lt;/strong&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 12 Jun 2014 00:00:00 +0800</pubDate>
+        <link>http://surunzi.github.io/KissyLearning/basic-tutorial/2014/06/12/quick-start/</link>
+        <guid isPermaLink="true">http://surunzi.github.io/KissyLearning/basic-tutorial/2014/06/12/quick-start/</guid>
+      </item>
+    
+      <item>
         <title>使用requirejs的define方法来添加模块</title>
         <description>&lt;p&gt;记得之前在Kissy的官网上，有人建议将依赖模块的声明放到前面去，这样看起来会比较方便些。官网提供的解决方法是：&lt;/p&gt;
 
