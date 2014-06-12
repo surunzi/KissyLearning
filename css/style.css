@@ -1,3 +1,7 @@
+::selection {
+	background: #ffea73;
+}
+
 * {
     font-family: 微软雅黑;
 }
@@ -54,6 +58,10 @@ ul {
 
 .article code .str, .article code .atv{
     color: #1abc9c;
+}
+
+.article h1, .article h2, .article h3, .article h4 {
+    color: #09c;
 }
 
 .article strong {
@@ -188,6 +196,7 @@ ul {
     position: relative;
     margin-bottom: 25px;
     height: 135px;
+    width: 240px;
 }
 
 #example-list li:hover span {
@@ -223,6 +232,7 @@ ul {
 
 #features .feature {
     width: 158.5px;
+    height: 104px;
     padding: 15px;
     text-align: center;
     float: left;
@@ -293,6 +303,24 @@ ul {
     padding-top: 30px;
     padding-bottom: 20px;
     background-color: #6f82a4;
+}
+
+#intro .img {
+    position: relative;
+}
+
+#intro #quick-start {
+    color: #ffea73;
+    position: absolute;
+    font-size: 30px;
+    left: 475px;
+    bottom: 120px;
+    font-weight: bold;
+    display: block;
+}
+
+#intro #quick-start:hover {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 #intro p {
@@ -416,6 +444,7 @@ ul {
     margin-bottom: 8px;
     padding: 5px 0;
     border-bottom: 1px solid #ccc;
+    color: #000;
 }
 
 #sub-intro .section .content {
