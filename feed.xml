@@ -7,6 +7,89 @@
     <atom:link href="http://surunzi.github.io/KissyLearning/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Base模块的扩展与插件机制</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;本次的例子是一个极为简单的wysiwyg编辑器，演示地址和源码分别戳&lt;a href=&quot;http://surunzi.github.io/KissyLearning/example/plugin/&quot;&gt;此处&lt;/a&gt;和&lt;a href=&quot;https://github.com/surunzi/KissyLearning/tree/master/example/plugin/&quot;&gt;此处&lt;/a&gt;^_^&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Base模块除了可以实现类的继承，本身还具有扩展和插件机制以便更好进行代码复用和类结构管理。先来看一下什么是扩展：&lt;strong&gt;Base.extend([类数组], {}, {})&lt;/strong&gt;。向extend方法第一个参数传入一个类数组，该数组中的类所具有的方法将会被添加入新建的类中。出现同名方法的话，扩展类数组中靠后的优先，覆盖前面的，主类的最优先，比如下面的例子：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var A = Base.extend({
+    constructor: function () {},
+    run: function () {
+        console.log(&#39;a&#39;);
+    }
+});
+var B = Base.extend({
+    constructor: function () {},
+    run: function () {
+        console.log(&#39;b&#39;);
+    }
+});
+var C = Base.extend([A, B], {
+});
+var c = new C;
+c.run();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;B在A之后，所以结果应该是’b’，再如下面：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var A = Base.extend({
+    constructor: function () {},
+    run: function () {
+        console.log(&#39;a&#39;);
+    }
+});
+var B = Base.extend({
+    constructor: function () {},
+    run: function () {
+        console.log(&#39;b&#39;);
+    }
+});
+var C = Base.extend([A, B], {
+    run: function () {
+        console.log(&#39;c&#39;);
+    }
+});
+var c = new C;
+c.run();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;主类中出现了run方法，覆盖掉B中的run方法，结果是c。通过Base扩展的机制可以实现类似于多继承的效果，Kissy内部很多组件也是通过此方法创建的，比如overlay：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Container.extend([
+    ContentBox,
+    Shim,
+    Loading,
+    AlignExtension,
+    Mask,
+    OverlayEffect
+], {...}, {...});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;注：扩展类数组中的构造方法比如上例中的A和B，如果是通过Base.extend方法创建的，需要覆盖掉原有的constructor方法。因为在默认constuctor方法链上有操作会出现循环调用进而导致堆栈溢出，具体是哪个语句导致在这里就不细讲了，有兴趣的可以自行看一下base模块和attribute模块的源码。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;除了扩展机制外，Base模块还提供了Plugin机制在类的实例（而不是类本身）上动态添加特性。Base提供了一个配置（plugins）和三个函数（plug、unplug和getPlugin）用来管理插件。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;editor.plug(undo);
+editor.plug(redo);
+editor.plug(bold);
+editor.plug(italic);
+editor.unplug(bold);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;plug方法做的实际上只是将传入的对象赋值到实例的plugins属性中去，同时调用对象的pluginInitializer方法。如果传入参数为function类型则会先将其实例化。unplug做的则是相反的工作，调用plugins中指定的plugin的pluginDestructor方法，并将其从plugins数组中去除。getPlugin不用说，当然是返回指定的plugin。&lt;/p&gt;
+
+&lt;p&gt;具体如何使用扩展和插件机制请参考本次的&lt;a href=&quot;http://surunzi.github.io/KissyLearning/example/plugin/&quot;&gt;简单wygiwys编辑器&lt;/a&gt;例子。当然，可能这并非是使用它们的最佳情景。具体什么时候该使用它们还是要由你自己依据实际的使用情况来决定。&lt;/p&gt;
+</description>
+        <pubDate>Sat, 14 Jun 2014 00:00:00 +0800</pubDate>
+        <link>http://surunzi.github.io/KissyLearning/basic-tutorial/2014/06/14/plugin-design-pattern-of-base-module/</link>
+        <guid isPermaLink="true">http://surunzi.github.io/KissyLearning/basic-tutorial/2014/06/14/plugin-design-pattern-of-base-module/</guid>
+      </item>
+    
+      <item>
         <title>Base类继承中的callSuper实现</title>
         <description>&lt;p&gt;刚接触到Kissy的Base模块时就很好奇它的callSuper方法到底是怎样实现的，这东西实在是太方便了。首先简述一下callSuper的作用：假设现在对象o有方法a，在方法a内调用callSuper。callSuper将找到o的原型op，并调用op中的方法a。&lt;/p&gt;
 
