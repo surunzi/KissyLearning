@@ -341,7 +341,6 @@ ul {
     margin: 0 auto;
     padding: 0;
     height: 100%;
-    width: 800px;
 }
 
 #nav ul li {
@@ -449,4 +448,64 @@ ul {
 
 #sub-intro .section .content {
     line-height: 1.5em;
+}
+
+@media screen and (max-width: 800px) {
+    * {
+        font-size: 15px;
+    }
+    
+    body {
+        overflow-x: hidden;
+    }
+    
+    .container, .container img, .container table {
+        width: 100%;
+    }
+    
+    #example-list ul {
+        margin: 0 auto;
+    }
+    
+    #example-list li {
+        float: none;
+        display: block;
+        margin: 15px auto;
+    }
+    
+    #features {
+        display: none;
+    }
+    
+    #intro #quick-start {
+        position: static;
+        padding: 5px;
+    }
+    
+    #intro p {
+        font-size: 15px;
+        padding: 0 5px;
+    }
+    
+    #nav {
+        height: auto;
+        display: table;
+        min-height: 80px;
+    }
+    
+    #nav ul li a:hover {
+        border-bottom: none;
+    }
+    
+    #post-list ul li span {
+        display: none;
+    }
+    
+    #sub-intro .section {
+        padding: 0 5px;
+    }
+    
+    #sub-intro .section .title, #post-list .section .title, #post .article .title, #document h2 {
+        font-size: 18px;
+    }
 }
