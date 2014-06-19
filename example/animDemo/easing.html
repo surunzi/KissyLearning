@@ -1,0 +1,39 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Anim简单示例</title><link rel="stylesheet" href="style.css"></head><body><h1 id="title">Anim Demos</h1><div id="nav"><a href="index.html">Basic</a> <a href="easing.html">Easing</a> <a href="query.html">Query</a> <a href="control.html">Control</a></div><div id="demo-container"><div id="object"></div></div><ul id="control"><li id="run">Run</li><li id="reset">Reset</li><li class="trans">swing</li><li class="trans">easeNone</li><li class="trans">linear</li><li class="trans">easeIn</li><li class="trans">easeOut</li><li class="trans">easeInStrong</li><li class="trans">easeOutStrong</li><li class="trans">easeBothStrong</li><li class="trans">elasticIn</li><li class="trans">elasticOut</li><li class="trans">elasticBoth</li><li class="trans">backIn</li><li class="trans">backOut</li><li class="trans">backBoth</li><li class="trans">bounceIn</li><li class="trans">bounceOut</li><li class="trans">bounceBoth</li><li id="cubic-bezier">cubic-bezier(<input type="text" value="0.5">,<input type="text" value="0.5">,<input type="text" value="0.5">,<input type="text" value="0.5">)</li></ul><script src="http://g.tbcdn.cn/kissy/k/1.4.3/seed.js" data-combine="{combine:true}"></script><script src="effect.js"></script><script>KISSY.use('node, anim, event', function (S, Node, Anim, Event) {
+        var transition = 'none'
+        // 开始动画
+        function animate() {
+            new Anim('#object', {
+                'left': '555',
+                'transform': 'rotate(360deg)'
+            }, 3, transition).run();
+        }
+        Node.one('#run').on('click', animate);
+        
+        // 绑定效果按钮
+        Event.delegate('#control', 'click', '.trans', function (e) {
+            var $ele = Node.one(e.currentTarget);
+            transition = $ele.text();
+            animate();
+        });
+        
+        // cubic-bezier特殊处理
+        Node.one('#cubic-bezier').on('click', function () {
+            transition = "cubic-bezier(", i = 0;
+            Node.one(this).all('input').each(function () {
+                var val = parseFloat(this.val());
+                if (val < 0 || val > 1) {
+                    val = 0.5;
+                }
+                if (i !== 3) {
+                    transition += val + ',';
+                } else {
+                    transition += val + ')';
+                }
+                i++;
+            });
+            animate();
+        });
+        Node.all('#cubic-bezier input').on('click', function (e) {
+            e.stopPropagation();
+        });
+    });</script></body></html>

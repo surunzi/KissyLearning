@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Anim简单示例</title><link rel="stylesheet" href="style.css"></head><body><h1 id="title">Anim Demos</h1><div id="nav"><a href="index.html">Basic</a> <a href="easing.html">Easing</a> <a href="query.html">Query</a> <a href="control.html">Control</a></div><div id="demo-container"><div id="object"></div></div><ul id="control"><li id="run">Run</li><li id="stop">Stop</li><li id="pause">Pause</li><li id="resume">Resume</li><li id="reset">Reset</li></ul><script src="http://g.tbcdn.cn/kissy/k/1.4.3/seed.js" data-combine="{combine:true}"></script><script src="effect.js"></script><script>KISSY.use('node, anim', function (S, Node, Anim) {
+        var anim = new Anim('#object', {
+                'left': 555,
+                'transform': 'rotate(360deg)'
+        }, 5);
+        Node.one('#run').on('click', function () {
+            anim = new Anim('#object', {
+                    'left': 555,
+                    'transform': 'rotate(360deg)'
+            }, 5);
+            anim.run();
+        });
+        Node.one('#stop').on('click', function () {
+            anim.stop();
+        });
+        Node.one('#pause').on('click', function () {
+            anim.pause();
+        });
+        Node.one('#resume').on('click', function () {
+            anim.resume();
+        });
+    });</script></body></html>
