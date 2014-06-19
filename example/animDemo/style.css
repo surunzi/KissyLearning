@@ -1,0 +1,68 @@
+body {
+    padding-top: 20px;
+    background: url(bg.gif);
+}
+
+#cubic-bezier input{
+    width: 20px;
+    font-family: Cambria, Georgia, serif;
+    font-style: italic;
+    border: none;
+    color: #777;
+    outline: none;
+}
+
+#demo-container {
+    width: 800px;
+    margin: 0 auto;
+    position: relative;
+    height: 250px;
+}
+
+#nav, #control {
+    padding: 0;
+    text-align: center;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+#nav a, #control li {
+    display: inline-block;
+    background: #fff;
+    padding: 5px 10px;
+    margin: 0 10px;
+    text-decoration: none;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+    color: #777;
+    font-family: Cambria, Georgia, serif;
+    cursor: pointer;
+    font-style: italic;
+    margin: 5px;
+}
+
+#nav a:hover {
+    color: #999;
+}
+
+#object {
+    width: 220px;
+    height: 220px;
+    background: url(object.png) center center no-repeat;
+    border-radius: 50%;
+    background-color: #6f82a4;
+    border: 15px dashed rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(0, 0, 0, 0.4);
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#title {
+    text-align: center;
+    font-weight: normal;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-family: Cambria, Georgia, serif;
+    color: #777;
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.7);
+}
