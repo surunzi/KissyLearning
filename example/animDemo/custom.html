@@ -19,30 +19,34 @@
     </div>
     <ul id="control">
         <li id="run">Run</li>
+        <li id="reset">Reset</li>
     </ul>
     <script src="http://g.tbcdn.cn/kissy/k/1.4.3/seed.js" data-combine="{combine:true}"></script>
     <script src="effect.js"></script>
     <script>
     KISSY.use('node, anim', function (S, Node, Anim) {
         Node.one('#run').on('click', function () {
-            Node.one('#object').animate({
-                'left': 555,
-                'transform': 'rotate(360deg)'
-            }, 1).animate({
-                'left': 0,
-                'transform': 'rotate(0deg)'
-            }, 1).animate({
-                'left': 277.5,
-                'transform': 'scale(0.1)'
-            }, 0.5).animate({
-                'transform': 'scale(2)',
-                'opacity': 0
-            }, 0.3).animate({
-                'transform': 'scale(1)',
-                'opacity': 1
-            }, 0.3).animate({
-                'left': 0
-            }, 1);
+            new Anim('#object', {
+                'opacity': {
+                    frame: function (anim, fx) {
+                        var dom = anim.node,
+                            opacity = dom.style.opacity;
+                        if (opacity === '1') {
+                            dom.style.opacity = 0;
+                        } else {
+                            dom.style.opacity = 1;
+                        }
+                    }
+                },
+                'left': {
+                    value: 555,
+                    easing: 'swing'
+                },
+                'transform': {
+                    value: 'scale(0.01)',
+                    easing: 'elasticBoth'
+                }
+            }, 5).run();
         });
     });
     </script>
