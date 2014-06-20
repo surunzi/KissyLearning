@@ -7,6 +7,112 @@
     <atom:link href="http://surunzi.github.io/KissyLearning/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Kissy动画对比jQuery动画的五个亮点</title>
+        <description>&lt;p&gt;Kissy动画模块的使用方法基本上与jQuery动画相差不了多少。除了提供jQuery动画所具有的功能外，Kissy在此之上又添加了不少有用的特性。假如你觉得jQuery动画满足不了你的需求，不妨试下Kissy的Anim模块。&lt;/p&gt;
+
+&lt;h3 id=&quot;css-transform&quot;&gt;1.支持跨浏览器的css transform&lt;/h3&gt;
+
+&lt;p&gt;CSS3中的transform可以让我们很容易地对元素进行平移、旋转、缩放等操作，然而浏览器前缀给我们的使用增加了诸多不便。在没有使用CSS预处理的情况下，每次@keyframes都必须写上几份着实让人感到厌烦。而且利用@keyframes控制动画在某些情况下也并不是那么合适。Kissy的Anim模块支持跨浏览器的css transform，不仅使用起来就跟其它属性变换一样简单，同时还能够使用CSS3的transition来提高动画性能。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;new Anim(&#39;#object&#39;, {
+    &#39;left&#39;: 555,
+    &#39;transform&#39;: &#39;rotate(360deg)&#39;
+}, 0.5).run();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;点击&lt;a href=&quot;http://surunzi.github.io/KissyLearning/example/animDemo/&quot;&gt;这里&lt;/a&gt;查看transform示例。&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;2.暂停恢复动画&lt;/h3&gt;
+
+&lt;p&gt;Kissy可以在动画过程中随时暂停并重新开始动画。假如你是在开发一个具有多种动画效果的复杂Web应用，这个功能将会派上很大的用场。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Node.one(&#39;#run&#39;).on(&#39;click&#39;, function () {
+    anim = new Anim(&#39;#object&#39;, {
+            &#39;left&#39;: 555,
+            &#39;transform&#39;: &#39;rotate(360deg)&#39;
+    }, 5);
+    anim.run();
+});
+Node.one(&#39;#stop&#39;).on(&#39;click&#39;, function () {
+    anim.stop();
+});
+Node.one(&#39;#pause&#39;).on(&#39;click&#39;, function () {
+    anim.pause();
+});
+Node.one(&#39;#resume&#39;).on(&#39;click&#39;, function () {
+    anim.resume();
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;点击&lt;a href=&quot;http://surunzi.github.io/KissyLearning/example/animDemo/control.html&quot;&gt;这里&lt;/a&gt;查看控制示例。&lt;/p&gt;
+
+&lt;h3 id=&quot;easing&quot;&gt;3.内置多种easing效果&lt;/h3&gt;
+
+&lt;p&gt;jQuery需要额外的插件才能够支持多种效果，而Anim模块本身就自带了多种效果，可取值：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;swing | easeNone | linear | easeIn | easeOut 
+easeBoth | easeInStrong | easeOutStrong | easeBothStrong 
+elasticIn | elasticOut | elasticBoth | backIn
+backOut | backBoth | bounceIn | bounceOut
+bounceBoth | cubic-bezier(p1x, p1y, p2x, p2y)（所有取值必须在[0,1]之间）
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;点击&lt;a href=&quot;http://surunzi.github.io/KissyLearning/example/animDemo/easing.html&quot;&gt;这里&lt;/a&gt;查看各种平滑函数的实际使用效果。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;4.自定义动画机制&lt;/h3&gt;
+
+&lt;p&gt;什么是自定义动画呢？简单来说，就是你可以自行定义每个属性各自的变化效果，而不必全部都采用同一套方式。利用这个特性，你可以更加自由地控制动画的效果，比如下面这个，让透明度在0和1中进行改变，从而实现一闪一闪的效果：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;new Anim(&#39;#object&#39;, {
+    &#39;opacity&#39;: {
+        frame: function (anim, fx) {
+            var dom = anim.node,
+                opacity = dom.style.opacity;
+            if (opacity === &#39;1&#39;) {
+                dom.style.opacity = 0;
+            } else {
+                dom.style.opacity = 1;
+            }
+        }
+    },
+    &#39;left&#39;: {
+        value: 555,
+        easing: &#39;swing&#39;
+    },
+    &#39;transform&#39;: {
+        value: &#39;scale(0.01)&#39;,
+        easing: &#39;elasticBoth&#39;
+    }
+}, 5).run();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;点击&lt;a href=&quot;http://surunzi.github.io/KissyLearning/example/animDemo/custom.html&quot;&gt;这里&lt;/a&gt;查看自定义动画的效果。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;5.对普通对象使用动画函数&lt;/h3&gt;
+
+&lt;p&gt;Anim模块也可以作用在普通对象之上，具体怎样就不多说了，请点击&lt;a href=&quot;http://docs.kissyui.com/1.4/docs/html/demo/anim/demo7.html&quot;&gt;此处&lt;/a&gt;查看官网的例子。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var o = {r: 1};
+var anim = new Anim(o, {
+    r: 100
+}, {
+    easing: &quot;swing&quot;,
+    duration: 1,
+    frame: function (anim, fx) {
+        circle(100, 100, fx.val);
+    }
+});
+anim.run();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;发挥自己的想像力，多试一下不同的组合，合理的利用Anim模块就可以创造出让人惊叹的动画效果来！戳&lt;a href=&quot;http://surunzi.github.io/KissyLearning/example/anim/&quot;&gt;此处&lt;/a&gt;可查看Anim模块的使用范例，仅供参考^_^ &lt;/p&gt;
+</description>
+        <pubDate>Fri, 20 Jun 2014 00:00:00 +0800</pubDate>
+        <link>http://surunzi.github.io/KissyLearning/basic-tutorial/2014/06/20/key-difference-between-jquery-animate-and-kissy-anim/</link>
+        <guid isPermaLink="true">http://surunzi.github.io/KissyLearning/basic-tutorial/2014/06/20/key-difference-between-jquery-animate-and-kissy-anim/</guid>
+      </item>
+    
+      <item>
         <title>Base模块的扩展与插件机制</title>
         <description>&lt;blockquote&gt;
   &lt;p&gt;本次的例子是一个极为简单的wysiwyg编辑器，演示地址和源码分别戳&lt;a href=&quot;http://surunzi.github.io/KissyLearning/example/plugin/&quot;&gt;此处&lt;/a&gt;和&lt;a href=&quot;https://github.com/surunzi/KissyLearning/tree/master/example/plugin/&quot;&gt;此处&lt;/a&gt;^_^&lt;/p&gt;
