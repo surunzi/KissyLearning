@@ -244,7 +244,7 @@ editor.unplug(bold);
         <title>Kissy快速入门</title>
         <description>&lt;h3 id=&quot;section&quot;&gt;什么是模块化？&lt;/h3&gt;
 
-&lt;p&gt;Kissy使用模块化开发，简单来说，就是将Kissy划分成多个部分，每个部分包含若干相似的功能。在开发过程中，需要用到哪一部分功能就需要载入相应的模块。需要进行DOM操作，就载入dom或者node模块；需要进行ajax操作，就载入io模块；需要进行cookie操作，就载入cookie模块，依此类推。&lt;/p&gt;
+&lt;p&gt;Kissy使用模块化开发，简单来说，就是将Kissy划分成多个部分，每个部分包含若干相关联的功能。在开发过程中，需要用到哪一部分功能就需要载入相应的模块。需要进行DOM操作，就载入dom或者node模块；需要进行ajax操作，就载入io模块；需要进行cookie操作，就载入cookie模块，依此类推。&lt;/p&gt;
 
 &lt;h3 id=&quot;kissy&quot;&gt;载入Kissy库&lt;/h3&gt;
 
