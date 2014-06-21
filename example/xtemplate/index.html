@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>xtemplate简单示例</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <ul id="hidden"></ul>
+    <div id="top-container">
+        <h2 id="title">Xtemplate简单示例</h2>
+        <form id="comment-form" action="" method="">
+            <div class="container">
+                <input type="text" name="name" placeholder="称呼">
+                <input id="submit-btn" type="submit">
+            </div>
+            <textarea name="content" placeholder="评论"></textarea>
+        </form>
+        <ul id="comments">
+        </ul>
+    </div>
+    <script id="comment-template" type="template">
+        <li>
+            <div class="name">{{name}}</div>
+            <div class="content">{{content}}</div>
+            <div class="date">{{date}}</div>
+        </li>
+    </script>
+    <script src="http://g.tbcdn.cn/kissy/k/1.4.3/seed.js" data-combine="{combine:true}"></script>
+    <script src="effect.js"></script>
+</body>
+</html>

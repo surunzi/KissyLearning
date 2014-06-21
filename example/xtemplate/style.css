@@ -1,0 +1,132 @@
+* {
+    font-family: 微软雅黑;
+}
+
+body {
+    background: url(bg.jpg) fixed;
+    margin: 0;
+    padding: 0;
+}
+
+#comment-form {
+    margin-bottom: 20px;
+}
+
+#comment-form .container {
+    margin-bottom: 5px;
+    display: table;
+}
+
+#comment-form input[name="name"] {
+    box-sizing: border-box;
+    width: 380px;
+    padding: 5px;
+    height: 35px;
+    margin: 0;
+    float: left;
+    border: 1px solid #ccc;
+    border-right: none;
+    outline: none;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.5);
+    border-radius: 4px 0 0 0;
+}
+
+#comment-form input[type="submit"] {
+    border-radius: 0 4px 0 0;
+    box-sizing: border-box;
+    height: 35px;
+    margin: 0;
+    width: 120px;
+    float: left;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+    outline: none;
+    background-image: linear-gradient(to bottom, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%);
+}
+
+#comment-form input[type="submit"]:hover {
+    opacity: 1;
+}
+
+#comment-form textarea {
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    padding: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.5);
+    border-radius: 0 0 4px 4px;
+}
+
+#comments, #hidden {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#comments li {
+    text-align: center;
+    height: 0;
+    opacity: 0;
+}
+
+#comments li .name, #hidden li .name {
+    padding: 5px 15px;
+    color: #fff;
+    position: relative;
+    top: 10px;
+    display: inline-block;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+    background-image: linear-gradient(to bottom, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%);
+}
+
+#comments li .content, #hidden li .content {
+    text-align: left;
+    border: 1px solid #ccc;
+    padding: 15px 5px;
+    border-radius: 4px;
+    color: #555;
+    font-size: 15px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+#comments li .date, #hidden li .date {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 0 0 4px 4px;
+    border: 1px solid #ccc;
+    border-top: none;
+    font-size: 14px;
+    color: #555;;
+}
+
+#hidden {
+    position: fixed;
+    width: 500px;
+    visibility: hidden;
+    top: 100%;
+}
+
+#title {
+    font-weight: normal;
+    font-size: 30px;
+    border-bottom: 1px solid #ccc;
+    padding: 15px 0;
+    color: #555;
+}
+
+#top-container {
+    width: 500px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 15px 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    border-radius: 0 0 4px 4px;
+}
