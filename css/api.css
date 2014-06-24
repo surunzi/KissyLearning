@@ -1,0 +1,80 @@
+.api {
+    font-size: 16px;
+}
+
+.api a {
+    color: #09c;
+}
+
+.api a:hover {
+    text-decoration: underline;
+}
+
+.api h3 {
+    padding: 10px 0;
+    color: #09c;
+    font-size: 20px;
+    border-bottom: 1px solid #ccc;
+    font-weight: normal;
+    margin: 10px 0;
+}
+
+.api table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.api table td, .api table th{
+    border: 1px solid #bbb;
+    padding: 6px 10px;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.api table th {
+    background-color: #09c;
+    border-color: #09c;
+    color: #fff;
+}
+
+.api ul {
+    padding-left: 0;
+    list-style: square inside;
+}
+
+.api ul li {
+    border-collapse: collapse;
+    border: 1px solid #f9f9f9;
+    padding: 5px 15px;
+}
+
+.api .function {
+    border: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+.api .function h4 {
+    background: #6f82a4;
+    margin: 0;
+    padding: 6px 10px;
+    color: #fff;
+}
+
+.api .function .detail {
+    padding: 6px 10px;
+}
+
+.api .function .detail p {
+    margin: 5px 0;
+}
+
+.api .title {
+    font-weight: normal;
+    font-size: 25px;
+    margin: 2px 0;
+    margin-bottom: 8px;
+    padding: 5px 0;
+    border-bottom: 1px solid #ccc;
+    color: #000;
+}
