@@ -1,33 +1,7 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:46
+build time: Jun 13 11:45
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/flash-common/utils
-*/
-
-KISSY.add("editor/plugin/flash-common/utils", ["swf"], function(S, require) {
-  var SWF = require("swf");
-  var Dom = S.DOM, flashUtils = {insertFlash:function(editor, src, attrs, _cls, _type) {
-    var nodeInfo = flashUtils.createSWF({src:src, attrs:attrs, document:editor.get("document")[0]}), real = nodeInfo.el, substitute = editor.createFakeElement(real, _cls || "ke_flash", _type || "flash", true, nodeInfo.html, attrs);
-    editor.insertElement(substitute);
-    return substitute
-  }, isFlashEmbed:function(element) {
-    return Dom.attr(element, "type") === "application/x-shockwave-flash" || /\.swf(?:$|\?)/i.test(Dom.attr(element, "src") || "")
-  }, getUrl:function(r) {
-    return SWF.getSrc(r)
-  }, createSWF:function(cfg) {
-    var render = Dom.create('<div style="' + "position:absolute;left:-9999px;top:-9999px;" + '"></div>', undefined, cfg.document);
-    cfg.htmlMode = "full";
-    Dom.append(render, cfg.document.body);
-    cfg.render = render;
-    var swf = new SWF(cfg);
-    Dom.remove(render);
-    return{el:S.all(swf.get("el")), html:swf.get("html")}
-  }};
-  return flashUtils
-});
-
+KISSY.add("editor/plugin/flash-common/utils",["swf","dom","node"],function(h,d,i,f){var e=d("swf"),b=d("dom"),g=d("node");f.exports={insertFlash:function(a,c,b,d,e){c=this.createSWF({src:c,attrs:b,document:a.get("document")[0]});b=a.createFakeElement(c.el,d||"ke_flash",e||"flash",!0,c.html,b);a.insertElement(b);return b},isFlashEmbed:function(a){return"application/x-shockwave-flash"===b.attr(a,"type")||/\.swf(?:$|\?)/i.test(b.attr(a,"src")||"")},getUrl:function(a){return e.getSrc(a)},createSWF:function(a){var c=
+b.create('<div style="position:absolute;left:-9999px;top:-9999px;"></div>',void 0,a.document);a.htmlMode="full";b.append(c,a.document.body);a.render=c;a=new e(a);b.remove(c);return{el:g(a.get("el")),html:a.get("html")}}}});

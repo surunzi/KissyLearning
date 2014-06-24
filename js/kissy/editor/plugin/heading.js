@@ -1,46 +1,7 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:47
+build time: Jun 13 11:46
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/heading
-*/
-
-KISSY.add("editor/plugin/heading", ["./menubutton", "editor", "./heading/cmd"], function(S, require) {
-  require("./menubutton");
-  var Editor = require("editor");
-  var headingCmd = require("./heading/cmd");
-  function HeadingPlugin() {
-  }
-  S.augment(HeadingPlugin, {pluginRenderUI:function(editor) {
-    headingCmd.init(editor);
-    var FORMAT_SELECTION_ITEMS = [], FORMATS = {"\u666e\u901a\u6587\u672c":"p", "\u6807\u98981":"h1", "\u6807\u98982":"h2", "\u6807\u98983":"h3", "\u6807\u98984":"h4", "\u6807\u98985":"h5", "\u6807\u98986":"h6"}, FORMAT_SIZES = {p:"1em", h1:"2em", h2:"1.5em", h3:"1.17em", h4:"1em", h5:"0.83em", h6:"0.67em"};
-    for(var p in FORMATS) {
-      FORMAT_SELECTION_ITEMS.push({content:p, value:FORMATS[p], elAttrs:{style:"font-size:" + FORMAT_SIZES[FORMATS[p]]}})
-    }
-    editor.addSelect("heading", {defaultCaption:"\u6807\u9898", width:"120px", menu:{children:FORMAT_SELECTION_ITEMS}, mode:Editor.Mode.WYSIWYG_MODE, listeners:{click:function(ev) {
-      var v = ev.target.get("value");
-      editor.execCommand("heading", v)
-    }, afterSyncUI:function() {
-      var self = this;
-      editor.on("selectionChange", function() {
-        if(editor.get("mode") === Editor.Mode.SOURCE_MODE) {
-          return
-        }
-        var headingValue = editor.queryCommandValue("heading"), value;
-        for(value in FORMAT_SIZES) {
-          if(value === headingValue) {
-            self.set("value", value);
-            return
-          }
-        }
-        self.set("value", null)
-      })
-    }}})
-  }});
-  return HeadingPlugin
-});
-
+KISSY.add("editor/plugin/heading",["./menubutton","editor","./heading/cmd"],function(i,a,j,g){function e(){}a("./menubutton");var f=a("editor"),h=a("./heading/cmd");e.prototype={pluginRenderUI:function(c){h.init(c);var a=[],b={"\u666e\u901a\u6587\u672c":"p","\u6807\u98981":"h1","\u6807\u98982":"h2","\u6807\u98983":"h3","\u6807\u98984":"h4","\u6807\u98985":"h5","\u6807\u98986":"h6"},e={p:"1em",h1:"2em",h2:"1.5em",h3:"1.17em",h4:"1em",h5:"0.83em",h6:"0.67em"},d;for(d in b)a.push({content:d,value:b[d],elAttrs:{style:"font-size:"+e[b[d]]}});c.addSelect("heading",{defaultCaption:"\u6807\u9898",
+width:"120px",menu:{children:a},mode:f.Mode.WYSIWYG_MODE,listeners:{click:function(a){a=a.target.get("value");c.execCommand("heading",a)},afterSyncUI:function(){var a=this;c.on("selectionChange",function(){if(c.get("mode")!==f.Mode.SOURCE_MODE){var d=c.queryCommandValue("heading"),b;for(b in e)if(b===d){a.set("value",b);return}a.set("value",null)}})}}})}};g.exports=e});

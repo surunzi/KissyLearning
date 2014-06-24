@@ -1,61 +1,8 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:46
+build time: Jun 13 11:45
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/flash
-*/
-
-KISSY.add("editor/plugin/flash", ["editor", "./flash-common/base-class", "./flash-common/utils", "./fake-objects", "./button"], function(S, require) {
-  var Editor = require("editor");
-  var FlashBaseClass = require("./flash-common/base-class");
-  var flashUtils = require("./flash-common/utils");
-  var fakeObjects = require("./fake-objects");
-  require("./button");
-  var CLS_FLASH = "ke_flash", TYPE_FLASH = "flash";
-  function FlashPlugin(config) {
-    this.config = config || {}
-  }
-  S.augment(FlashPlugin, {pluginRenderUI:function(editor) {
-    fakeObjects.init(editor);
-    var dataProcessor = editor.htmlDataProcessor, dataFilter = dataProcessor.dataFilter;
-    dataFilter.addRules({tags:{object:function(element) {
-      var classId = element.getAttribute("classid"), i;
-      if(!classId) {
-        var childNodes = element.childNodes;
-        for(i = 0;i < childNodes.length;i++) {
-          if(childNodes[i].nodeName === "embed") {
-            if(!flashUtils.isFlashEmbed(childNodes[i][i])) {
-              return dataProcessor.createFakeParserElement(element, CLS_FLASH, TYPE_FLASH, true)
-            }else {
-              return null
-            }
-          }
-        }
-        return null
-      }
-      return dataProcessor.createFakeParserElement(element, CLS_FLASH, TYPE_FLASH, true)
-    }, embed:function(element) {
-      if(flashUtils.isFlashEmbed(element)) {
-        return dataProcessor.createFakeParserElement(element, CLS_FLASH, TYPE_FLASH, true)
-      }else {
-        return null
-      }
-    }}}, 5);
-    var flashControl = new FlashBaseClass({editor:editor, cls:CLS_FLASH, type:TYPE_FLASH, pluginConfig:this.config, bubbleId:"flash", contextMenuId:"flash", contextMenuHandlers:{"Flash\u5c5e\u6027":function() {
-      var selectedEl = this.get("editorSelectedEl");
-      if(selectedEl) {
-        flashControl.show(selectedEl)
-      }
-    }}});
-    this.flashControl = flashControl;
-    editor.addButton("flash", {tooltip:"\u63d2\u5165Flash", listeners:{click:function() {
-      flashControl.show()
-    }}, mode:Editor.Mode.WYSIWYG_MODE})
-  }});
-  return FlashPlugin
-});
-
+KISSY.add("editor/plugin/flash",["editor","./flash-common/base-class","./flash-common/utils","./fake-objects","./button"],function(k,b,l,g){function e(a){this.config=a||{}}var h=b("editor"),i=b("./flash-common/base-class"),f=b("./flash-common/utils"),j=b("./fake-objects");b("./button");e.prototype={pluginRenderUI:function(a){j.init(a);var b=a.htmlDataProcessor;b.dataFilter.addRules({tags:{object:function(d){var a;if(!d.getAttribute("classid")){var c=d.childNodes;for(a=0;a<c.length;a++)if("embed"===
+c[a].nodeName)if(f.isFlashEmbed(c[a][a]))break;else return b.createFakeParserElement(d,"ke_flash","flash",!0);return null}return b.createFakeParserElement(d,"ke_flash","flash",!0)},embed:function(a){return f.isFlashEmbed(a)?b.createFakeParserElement(a,"ke_flash","flash",!0):null}}},5);var c=new i({editor:a,cls:"ke_flash",type:"flash",pluginConfig:this.config,bubbleId:"flash",contextMenuId:"flash",contextMenuHandlers:{"Flash\u5c5e\u6027":function(){var a=this.get("editorSelectedEl");a&&c.show(a)}}});this.flashControl=
+c;a.addButton("flash",{tooltip:"\u63d2\u5165Flash",listeners:{click:function(){c.show()}},mode:h.Mode.WYSIWYG_MODE})}};g.exports=e});

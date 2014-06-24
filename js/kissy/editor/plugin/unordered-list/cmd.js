@@ -1,36 +1,7 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:51
+build time: Jun 13 11:49
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/unordered-list/cmd
-*/
-
-KISSY.add("editor/plugin/unordered-list/cmd", ["editor", "../list-utils/cmd"], function(S, require) {
-  var Editor = require("editor");
-  var listCmd = require("../list-utils/cmd");
-  var insertUnorderedList = "insertUnorderedList", ListCommand = listCmd.ListCommand, queryActive = listCmd.queryActive, ulCmd = new ListCommand("ul");
-  return{init:function(editor) {
-    if(!editor.hasCommand(insertUnorderedList)) {
-      editor.addCommand(insertUnorderedList, {exec:function(editor, type) {
-        editor.focus();
-        ulCmd.exec(editor, type)
-      }})
-    }
-    var queryUl = Editor.Utils.getQueryCmd(insertUnorderedList);
-    if(!editor.hasCommand(queryUl)) {
-      editor.addCommand(queryUl, {exec:function(editor) {
-        var selection = editor.getSelection();
-        if(selection && !selection.isInvalid) {
-          var startElement = selection.getStartElement();
-          var elementPath = new Editor.ElementPath(startElement);
-          return queryActive("ul", elementPath)
-        }
-      }})
-    }
-  }}
-});
-
+KISSY.add("editor/plugin/unordered-list/cmd",["editor","../list-utils/cmd"],function(b,d,i,f){var e=d("editor"),b=d("../list-utils/cmd"),g=b.queryActive,h=new b.ListCommand("ul");f.exports={init:function(c){c.hasCommand("insertUnorderedList")||c.addCommand("insertUnorderedList",{exec:function(a,b){a.focus();h.exec(a,b)}});var b=e.Utils.getQueryCmd("insertUnorderedList");c.hasCommand(b)||c.addCommand(b,{exec:function(a){if((a=a.getSelection())&&!a.isInvalid)return a=a.getStartElement(),a=new e.ElementPath(a),
+g("ul",a)}})}}});

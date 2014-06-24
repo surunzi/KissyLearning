@@ -1,18 +1,6 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:48
+build time: Jun 13 11:47
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/justify-right/cmd
-*/
-
-KISSY.add("editor/plugin/justify-right/cmd", ["../justify-cmd"], function(S, require) {
-  var justifyUtils = require("../justify-cmd");
-  return{init:function(editor) {
-    justifyUtils.addCommand(editor, "justifyRight", "right")
-  }}
-});
-
+KISSY.add("editor/plugin/justify-right/cmd",["../justify-cmd"],function(d,a,e,b){var c=a("../justify-cmd");b.exports={init:function(a){c.addCommand(a,"justifyRight","right")}}});

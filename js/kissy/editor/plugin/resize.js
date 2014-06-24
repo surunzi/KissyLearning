@@ -1,59 +1,7 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:50
+build time: Jun 13 11:48
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/resize
-*/
-
-KISSY.add("editor/plugin/resize", ["dd"], function(S, require) {
-  var DD = require("dd");
-  var Node = S.Node;
-  function Resize(config) {
-    this.config = config || {}
-  }
-  S.augment(Resize, {pluginRenderUI:function(editor) {
-    var Draggable = DD.Draggable, statusBarEl = editor.get("statusBarEl"), cfg = this.config, direction = cfg.direction || ["x", "y"];
-    var cursor = "se-resize";
-    if(direction.length === 1) {
-      if(direction[0] === "x") {
-        cursor = "e-resize"
-      }else {
-        cursor = "s-resize"
-      }
-    }
-    var resizer = (new Node('<div class="' + editor.get("prefixCls") + 'editor-resizer" style="cursor: ' + cursor + '"></div>')).appendTo(statusBarEl);
-    editor.on("maximizeWindow", function() {
-      resizer.css("display", "none")
-    });
-    editor.on("restoreWindow", function() {
-      resizer.css("display", "")
-    });
-    var d = new Draggable({node:resizer, groups:false}), height = 0, width = 0, dragStartMousePos, heightEl = editor.get("el"), widthEl = editor.get("el");
-    d.on("dragstart", function() {
-      height = heightEl.height();
-      width = widthEl.width();
-      editor.fire("resizeStart");
-      dragStartMousePos = d.get("dragStartMousePos")
-    });
-    d.on("drag", function(ev) {
-      var diffX = ev.pageX - dragStartMousePos.left, diffY = ev.pageY - dragStartMousePos.top;
-      if(S.inArray("y", direction)) {
-        editor.set("height", height + diffY)
-      }
-      if(S.inArray("x", direction)) {
-        editor.set("width", width + diffX)
-      }
-      editor.fire("resize")
-    });
-    editor.on("destroy", function() {
-      d.destroy();
-      resizer.remove()
-    })
-  }});
-  return Resize
-});
-
+KISSY.add("editor/plugin/resize",["dd","node","util"],function(o,b,p,f){function c(a){this.config=a||{}}var l=b("dd"),m=b("node"),h=b("util");c.prototype={pluginRenderUI:function(a){var b=l.Draggable,c=a.get("statusBarEl"),d=this.config.direction||["x","y"],i="se-resize";1===d.length&&(i="x"===d[0]?"e-resize":"s-resize");var e=m('<div class="'+a.get("prefixCls")+'editor-resizer" style="cursor: '+i+'"></div>').appendTo(c);a.on("maximizeWindow",function(){e.css("display","none")});a.on("restoreWindow",
+function(){e.css("display","")});var g=new b({node:e,groups:!1}),j=0,k=0,f=a.get("el"),n=a.get("el");g.on("dragstart",function(){j=f.height();k=n.width();a.fire("resizeStart")});g.on("drag",function(b){h.inArray("y",d)&&a.set("height",j+b.deltaY);h.inArray("x",d)&&a.set("width",k+b.deltaX);a.fire("resize")});a.on("destroy",function(){g.destroy();e.remove()})}};f.exports=c});

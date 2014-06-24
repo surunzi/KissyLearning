@@ -1,37 +1,6 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:49
+build time: Jun 13 11:47
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/maximize
-*/
-
-KISSY.add("editor/plugin/maximize", ["./maximize/cmd", "./button"], function(S, require) {
-  var maximizeCmd = require("./maximize/cmd");
-  require("./button");
-  var MAXIMIZE_CLASS = "maximize", RESTORE_CLASS = "restore", MAXIMIZE_TIP = "\u5168\u5c4f", RESTORE_TIP = "\u53d6\u6d88\u5168\u5c4f";
-  function maximizePlugin() {
-  }
-  S.augment(maximizePlugin, {pluginRenderUI:function(editor) {
-    maximizeCmd.init(editor);
-    editor.addButton("maximize", {tooltip:MAXIMIZE_TIP, listeners:{click:function() {
-      var self = this;
-      var checked = self.get("checked");
-      if(checked) {
-        editor.execCommand("maximizeWindow");
-        self.set("tooltip", RESTORE_TIP);
-        self.set("contentCls", RESTORE_CLASS)
-      }else {
-        editor.execCommand("restoreWindow");
-        self.set("tooltip", MAXIMIZE_TIP);
-        self.set("contentCls", MAXIMIZE_CLASS)
-      }
-      editor.focus()
-    }}, checkable:true})
-  }});
-  return maximizePlugin
-});
-
+KISSY.add("editor/plugin/maximize",["./maximize/cmd","./button"],function(f,b,g,d){function c(){}var e=b("./maximize/cmd");b("./button");c.prototype={pluginRenderUI:function(a){e.init(a);a.addButton("maximize",{tooltip:"\u5168\u5c4f",listeners:{click:function(){this.get("checked")?(a.execCommand("maximizeWindow"),this.set("tooltip","\u53d6\u6d88\u5168\u5c4f"),this.set("contentCls","restore")):(a.execCommand("restoreWindow"),this.set("tooltip","\u5168\u5c4f"),this.set("contentCls","maximize"));a.focus()}},checkable:!0})}};d.exports=c});

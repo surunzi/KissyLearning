@@ -1,27 +1,6 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:44
+build time: Jun 13 11:44
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/back-color/cmd
-*/
-
-KISSY.add("editor/plugin/back-color/cmd", ["../color/cmd"], function(S, require) {
-  var cmd = require("../color/cmd");
-  var BACK_COLOR_STYLE = {element:"span", styles:{"background-color":"#(color)"}, overrides:[{element:"*", styles:{"background-color":null}}], childRule:function(currentNode) {
-    return!!currentNode.style("background-color")
-  }};
-  return{init:function(editor) {
-    if(!editor.hasCommand("backColor")) {
-      editor.addCommand("backColor", {exec:function(editor, c) {
-        editor.execCommand("save");
-        cmd.applyColor(editor, c, BACK_COLOR_STYLE);
-        editor.execCommand("save")
-      }})
-    }
-  }}
-});
-
+KISSY.add("editor/plugin/back-color/cmd",["../color/cmd"],function(f,b,g,c){var d=b("../color/cmd"),e={element:"span",styles:{"background-color":"#(color)"},overrides:[{element:"*",styles:{"background-color":null}}],childRule:function(a){return!!a.style("background-color")}};c.exports={init:function(a){a.hasCommand("backColor")||a.addCommand("backColor",{exec:function(a,b){a.execCommand("save");d.applyColor(a,b,e);a.execCommand("save")}})}}});

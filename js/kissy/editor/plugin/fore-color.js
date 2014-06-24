@@ -1,24 +1,6 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:47
+build time: Jun 13 11:46
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/fore-color
-*/
-
-KISSY.add("editor/plugin/fore-color", ["./color/btn", "./fore-color/cmd"], function(S, require) {
-  var Button = require("./color/btn");
-  var cmd = require("./fore-color/cmd");
-  function ForeColorPlugin(config) {
-    this.config = config || {}
-  }
-  S.augment(ForeColorPlugin, {pluginRenderUI:function(editor) {
-    cmd.init(editor);
-    Button.init(editor, {cmdType:"foreColor", defaultColor:"rgb(204, 0, 0)", tooltip:"\u6587\u672c\u989c\u8272"})
-  }});
-  return ForeColorPlugin
-});
-
+KISSY.add("editor/plugin/fore-color",["./color/btn","./fore-color/cmd"],function(g,b,h,d){function c(a){this.config=a||{}}var e=b("./color/btn"),f=b("./fore-color/cmd");c.prototype={pluginRenderUI:function(a){f.init(a);e.init(a,{cmdType:"foreColor",defaultColor:"rgb(204, 0, 0)",tooltip:"\u6587\u672c\u989c\u8272"})}};d.exports=c});

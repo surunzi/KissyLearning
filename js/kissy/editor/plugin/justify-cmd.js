@@ -1,59 +1,7 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:48
+build time: Jun 13 11:46
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/justify-cmd
-*/
-
-KISSY.add("editor/plugin/justify-cmd", ["editor"], function(S, require) {
-  var Editor = require("editor");
-  var alignRemoveRegex = /(-moz-|-webkit-|start|auto)/gi, defaultAlign = "left";
-  function exec(editor, textAlign) {
-    editor.focus();
-    editor.execCommand("save");
-    var selection = editor.getSelection(), bookmarks = selection.createBookmarks(), ranges = selection.getRanges(), iterator, block;
-    for(var i = ranges.length - 1;i >= 0;i--) {
-      iterator = ranges[i].createIterator();
-      iterator.enlargeBr = true;
-      while(block = iterator.getNextParagraph()) {
-        block.removeAttr("align");
-        if(isAlign(block, textAlign)) {
-          block.css("text-align", "")
-        }else {
-          block.css("text-align", textAlign)
-        }
-      }
-    }
-    selection.selectBookmarks(bookmarks);
-    editor.execCommand("save");
-    editor.notifySelectionChange()
-  }
-  function isAlign(block, textAlign) {
-    var align = block.css("text-align").replace(alignRemoveRegex, "") || defaultAlign;
-    return align === textAlign
-  }
-  return{addCommand:function(editor, command, textAlign) {
-    if(!editor.hasCommand(command)) {
-      editor.addCommand(command, {exec:function(editor) {
-        exec(editor, textAlign)
-      }});
-      editor.addCommand(Editor.Utils.getQueryCmd(command), {exec:function(editor) {
-        var selection = editor.getSelection();
-        if(selection && !selection.isInvalid) {
-          var startElement = selection.getStartElement();
-          var path = new Editor.ElementPath(startElement);
-          var block = path.block || path.blockLimit;
-          if(!block || block.nodeName() === "body") {
-            return false
-          }
-          return isAlign(block, textAlign)
-        }
-      }})
-    }
-  }}
-});
-
+KISSY.add("editor/plugin/justify-cmd",["editor"],function(l,j,m,k){var c=j("editor"),i=/(-moz-|-webkit-|start|auto)/gi;k.exports={addCommand:function(b,d,f){b.hasCommand(d)||(b.addCommand(d,{exec:function(a){a.focus();a.execCommand("save");for(var b=a.getSelection(),d=b.createBookmarks(),c=b.getRanges(),g,e,h=c.length-1;0<=h;h--){g=c[h].createIterator();for(g.enlargeBr=!0;e=g.getNextParagraph();)e.removeAttr("align"),(e.css("text-align").replace(i,"")||"left")===f?e.css("text-align",""):e.css("text-align",
+f)}b.selectBookmarks(d);a.execCommand("save");a.notifySelectionChange()}}),b.addCommand(c.Utils.getQueryCmd(d),{exec:function(a){if((a=a.getSelection())&&!a.isInvalid)return a=a.getStartElement(),a=new c.ElementPath(a),a=a.block||a.blockLimit,!a||"body"===a.nodeName()?!1:(a.css("text-align").replace(i,"")||"left")===f}}))}}});

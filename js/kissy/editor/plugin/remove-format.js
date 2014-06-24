@@ -1,26 +1,6 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:50
+build time: Jun 13 11:48
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/remove-format
-*/
-
-KISSY.add("editor/plugin/remove-format", ["editor", "./button", "./remove-format/cmd"], function(S, require) {
-  var Editor = require("editor");
-  require("./button");
-  var formatCmd = require("./remove-format/cmd");
-  function removeFormat() {
-  }
-  S.augment(removeFormat, {pluginRenderUI:function(editor) {
-    formatCmd.init(editor);
-    editor.addButton("removeFormat", {tooltip:"\u6e05\u9664\u683c\u5f0f", listeners:{click:function() {
-      editor.execCommand("removeFormat")
-    }}, mode:Editor.Mode.WYSIWYG_MODE})
-  }});
-  return removeFormat
-});
-
+KISSY.add("editor/plugin/remove-format",["editor","./button","./remove-format/cmd"],function(f,a,g,c){function b(){}var d=a("editor");a("./button");var e=a("./remove-format/cmd");b.prototype={pluginRenderUI:function(a){e.init(a);a.addButton("removeFormat",{tooltip:"\u6e05\u9664\u683c\u5f0f",listeners:{click:function(){a.execCommand("removeFormat")}},mode:d.Mode.WYSIWYG_MODE})}};c.exports=b});

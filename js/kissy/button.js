@@ -1,49 +1,8 @@
 /*
-Copyright 2013, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Dec 4 22:04
+build time: Jun 13 11:41
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- button/render
- button
-*/
-
-KISSY.add("button/render", ["component/control"], function(S, require) {
-  var Control = require("component/control");
-  return Control.getDefaultRender().extend({beforeCreateDom:function(renderData) {
-    var self = this;
-    S.mix(renderData.elAttrs, {role:"button", title:renderData.tooltip, "aria-describedby":renderData.describedby});
-    if(renderData.checked) {
-      renderData.elCls.push(self.getBaseCssClasses("checked"))
-    }
-  }, _onSetChecked:function(v) {
-    var self = this, cls = self.getBaseCssClasses("checked");
-    self.$el[v ? "addClass" : "removeClass"](cls)
-  }, _onSetTooltip:function(title) {
-    this.el.setAttribute("title", title)
-  }, _onSetDescribedby:function(describedby) {
-    this.el.setAttribute("aria-describedby", describedby)
-  }}, {name:"ButtonRender"})
-});
-KISSY.add("button", ["node", "component/control", "button/render"], function(S, require) {
-  var Node = require("node"), Control = require("component/control"), ButtonRender = require("button/render");
-  var KeyCode = Node.KeyCode;
-  return Control.extend({isButton:1, bindUI:function() {
-    this.$el.on("keyup", this.handleKeyDownInternal, this)
-  }, handleKeyDownInternal:function(e) {
-    if(e.keyCode === KeyCode.ENTER && e.type === "keydown" || e.keyCode === KeyCode.SPACE && e.type === "keyup") {
-      return this.handleClickInternal(e)
-    }
-    return e.keyCode === KeyCode.SPACE
-  }, handleClickInternal:function() {
-    var self = this;
-    self.callSuper();
-    if(self.get("checkable")) {
-      self.set("checked", !self.get("checked"))
-    }
-    self.fire("click")
-  }}, {ATTRS:{value:{}, describedby:{value:"", view:1}, tooltip:{value:"", view:1}, checkable:{}, checked:{value:false, view:1}, xrender:{value:ButtonRender}}, xclass:"button"})
-});
-
+KISSY.add("button",["node","component/control"],function(e,c,g,f){var e=c("node"),c=c("component/control"),d=e.Event.KeyCode;f.exports=c.extend({isButton:1,beforeCreateDom:function(a){var b=a.elAttrs;b.role="button";a.tooltip&&(b.title=a.tooltip);a["aria-describedby"]&&(b["aria-describedby"]=a.describedby);a.checked&&a.elCls.push(this.getBaseCssClasses("checked"))},bindUI:function(){this.$el.on("keyup",this.handleKeyDownInternal,this)},handleKeyDownInternal:function(a){return a.keyCode===d.ENTER&&
+"keydown"===a.type||a.keyCode===d.SPACE&&"keyup"===a.type?this.handleClickInternal(a):a.keyCode===d.SPACE},handleClickInternal:function(){this.callSuper();this.get("checkable")&&this.set("checked",!this.get("checked"));this.fire("click")},_onSetChecked:function(a){var b=this.getBaseCssClasses("checked");this.$el[a?"addClass":"removeClass"](b)},_onSetTooltip:function(a){this.el.setAttribute("title",a)},_onSetDescribedby:function(a){this.el.setAttribute("aria-describedby",a)}},{ATTRS:{value:{},describedby:{value:"",
+render:1,sync:0},tooltip:{value:"",render:1,sync:0},checkable:{},checked:{value:!1,render:1,sync:0}},xclass:"button"})});

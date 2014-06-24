@@ -1,33 +1,7 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:46
+build time: Jun 13 11:44
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/dialog
-*/
-
-KISSY.add("editor/plugin/dialog", ["editor", "overlay", "./focus-fix", "dd/plugin/constrain", "component/plugin/drag"], function(S, require) {
-  var Editor = require("editor");
-  var Overlay = require("overlay");
-  var focusFix = require("./focus-fix");
-  var ConstrainPlugin = require("dd/plugin/constrain");
-  var DragPlugin = require("component/plugin/drag");
-  return Overlay.Dialog.extend({initializer:function() {
-    this.plug(new DragPlugin({handlers:[".ks-editor-dialog-header"], plugins:[new ConstrainPlugin({constrain:window})]}))
-  }, bindUI:function() {
-    focusFix.init(this)
-  }, show:function() {
-    var self = this;
-    self.center();
-    var y = self.get("y");
-    if(y - S.DOM.scrollTop() > 200) {
-      y = S.DOM.scrollTop() + 200;
-      self.set("y", y)
-    }
-    self.callSuper()
-  }}, {ATTRS:{prefixCls:{value:"ks-editor-"}, zIndex:{value:Editor.baseZIndex(Editor.ZIndexManager.OVERLAY)}}})
-});
-
+KISSY.add("editor/plugin/dialog","editor,overlay,./focus-fix,dd/plugin/constrain,component/plugin/drag,dom".split(","),function(b,a,c,e){var b=a("editor"),c=a("overlay"),f=a("./focus-fix"),g=a("dd/plugin/constrain"),h=a("component/plugin/drag"),d=a("dom");e.exports=c.Dialog.extend({initializer:function(){this.plug(new h({handlers:[".ks-editor-dialog-header"],plugins:[new g({constrain:window})]}))},bindUI:function(){f.init(this)},show:function(){this.center();var a=this.get("y");if(a-d.scrollTop()>
+200){a=d.scrollTop()+200;this.set("y",a)}this.callSuper()}},{ATTRS:{prefixCls:{value:"ks-editor-"},zIndex:{value:b.baseZIndex(b.ZIndexManager.OVERLAY)}}})});

@@ -1,4 +1,3 @@
-KISSY.ready(function (S) {
 KISSY.use(['node'], function (S, Node) {
 
 var $page, 
@@ -56,5 +55,4 @@ initFeature('prettify', function () {
     prettyPrint();
 });
 
-});
 });

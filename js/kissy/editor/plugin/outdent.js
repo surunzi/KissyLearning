@@ -1,39 +1,7 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:50
+build time: Jun 13 11:48
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/outdent
-*/
-
-KISSY.add("editor/plugin/outdent", ["editor", "./button", "./outdent/cmd"], function(S, require) {
-  var Editor = require("editor");
-  require("./button");
-  var indexCmd = require("./outdent/cmd");
-  function outdent() {
-  }
-  S.augment(outdent, {pluginRenderUI:function(editor) {
-    indexCmd.init(editor);
-    editor.addButton("outdent", {tooltip:"\u51cf\u5c11\u7f29\u8fdb\u91cf", listeners:{click:function() {
-      editor.execCommand("outdent");
-      editor.focus()
-    }, afterSyncUI:function() {
-      var self = this;
-      editor.on("selectionChange", function() {
-        if(editor.get("mode") === Editor.Mode.SOURCE_MODE) {
-          return
-        }
-        if(editor.queryCommandValue("outdent")) {
-          self.set("disabled", false)
-        }else {
-          self.set("disabled", true)
-        }
-      })
-    }}, mode:Editor.Mode.WYSIWYG_MODE})
-  }});
-  return outdent
-});
-
+KISSY.add("editor/plugin/outdent",["editor","./button","./outdent/cmd"],function(g,b,h,e){function c(){}var d=b("editor");b("./button");var f=b("./outdent/cmd");c.prototype={pluginRenderUI:function(a){f.init(a);a.addButton("outdent",{tooltip:"\u51cf\u5c11\u7f29\u8fdb\u91cf",listeners:{click:function(){a.execCommand("outdent");a.focus()},afterSyncUI:function(){var b=this;a.on("selectionChange",function(){a.get("mode")!==d.Mode.SOURCE_MODE&&(a.queryCommandValue("outdent")?b.set("disabled",!1):b.set("disabled",!0))})}},mode:d.Mode.WYSIWYG_MODE})}};
+e.exports=c});

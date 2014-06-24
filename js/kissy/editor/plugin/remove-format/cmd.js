@@ -1,69 +1,8 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:50
+build time: Jun 13 11:48
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/remove-format/cmd
-*/
-
-KISSY.add("editor/plugin/remove-format/cmd", ["editor"], function(S, require) {
-  var Editor = require("editor");
-  var KER = Editor.RangeType, ElementPath = Editor.ElementPath, Dom = S.DOM, removeFormatTags = "b,big,code,del,dfn,em,font,i,ins,kbd," + "q,samp,small,span,strike,strong,sub,sup,tt,u,var,s", removeFormatAttributes = ("class,style,lang,width,height," + "align,hspace,valign").split(/,/), tagsRegex = new RegExp("^(?:" + removeFormatTags.replace(/,/g, "|") + ")$", "i");
-  function removeAttrs(el, attrs) {
-    for(var i = 0;i < attrs.length;i++) {
-      el.removeAttr(attrs[i])
-    }
-  }
-  return{init:function(editor) {
-    if(!editor.hasCommand("removeFormat")) {
-      editor.addCommand("removeFormat", {exec:function() {
-        editor.focus();
-        tagsRegex.lastIndex = 0;
-        var ranges = editor.getSelection().getRanges();
-        editor.execCommand("save");
-        for(var i = 0, range;range = ranges[i];i++) {
-          if(range.collapsed) {
-            continue
-          }
-          range.enlarge(KER.ENLARGE_ELEMENT);
-          var bookmark = range.createBookmark(), startNode = bookmark.startNode, endNode = bookmark.endNode;
-          var breakParent = function(node) {
-            var path = new ElementPath(node), pathElements = path.elements;
-            for(var i = 1, pathElement;pathElement = pathElements[i];i++) {
-              if(pathElement.equals(path.block) || pathElement.equals(path.blockLimit)) {
-                break
-              }
-              if(tagsRegex.test(pathElement.nodeName())) {
-                node._4eBreakParent(pathElement)
-              }
-            }
-          };
-          breakParent(startNode);
-          breakParent(endNode);
-          var currentNode = startNode._4eNextSourceNode(true, Dom.NodeType.ELEMENT_NODE, undefined, undefined);
-          while(currentNode) {
-            if(currentNode.equals(endNode)) {
-              break
-            }
-            var nextNode = currentNode._4eNextSourceNode(false, Dom.NodeType.ELEMENT_NODE, undefined, undefined);
-            if(!(currentNode.nodeName() === "img" && (currentNode.attr("_ke_real_element") || /\bke_/.test(currentNode[0].className)))) {
-              if(tagsRegex.test(currentNode.nodeName())) {
-                currentNode._4eRemove(true)
-              }else {
-                removeAttrs(currentNode, removeFormatAttributes)
-              }
-            }
-            currentNode = nextNode
-          }
-          range.moveToBookmark(bookmark)
-        }
-        editor.getSelection().selectRanges(ranges);
-        editor.execCommand("save")
-      }})
-    }
-  }}
-});
-
+KISSY.add("editor/plugin/remove-format/cmd",["editor","dom"],function(d,c,p,k){function l(b,f){for(var e=0;e<f.length;e++)b.removeAttr(f[e])}var d=c("editor"),m=d.RangeType,n=d.ElementPath,j=c("dom"),o="class,style,lang,width,height,align,hspace,valign".split(/,/),i=RegExp("^(?:"+"b,big,code,del,dfn,em,font,i,ins,kbd,q,samp,small,span,strike,strong,sub,sup,tt,u,var,s".replace(/,/g,"|")+")$","i");k.exports={init:function(b){b.hasCommand("removeFormat")||b.addCommand("removeFormat",{exec:function(){b.focus();
+i.lastIndex=0;var f=b.getSelection().getRanges();b.execCommand("save");for(var e=0,g;g=f[e];e++)if(!g.collapsed){g.enlarge(m.ENLARGE_ELEMENT);var d=g.createBookmark(),a=d.startNode,c=d.endNode,h=function(a){for(var b=new n(a),d=b.elements,e=1,c;(c=d[e])&&!c.equals(b.block)&&!c.equals(b.blockLimit);e++)i.test(c.nodeName())&&a._4eBreakParent(c)};h(a);h(c);for(a=a._4eNextSourceNode(!0,j.NodeType.ELEMENT_NODE,void 0,void 0);a&&!a.equals(c);)h=a._4eNextSourceNode(!1,j.NodeType.ELEMENT_NODE,void 0,void 0),
+"img"===a.nodeName()&&(a.attr("_ke_real_element")||/\bke_/.test(a[0].className))||(i.test(a.nodeName())?a._4eRemove(!0):l(a,o)),a=h;g.moveToBookmark(d)}b.getSelection().selectRanges(f);b.execCommand("save")}})}}});

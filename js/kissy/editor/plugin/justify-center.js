@@ -1,49 +1,7 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:48
+build time: Jun 13 11:46
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/justify-center
-*/
-
-KISSY.add("editor/plugin/justify-center", ["editor", "./justify-center/cmd", "./button"], function(S, require) {
-  var Editor = require("editor");
-  var justifyCenterCmd = require("./justify-center/cmd");
-  require("./button");
-  function exec() {
-    var editor = this.get("editor");
-    editor.execCommand("justifyCenter");
-    editor.focus()
-  }
-  function justifyCenter() {
-  }
-  S.augment(justifyCenter, {pluginRenderUI:function(editor) {
-    justifyCenterCmd.init(editor);
-    editor.addButton("justifyCenter", {tooltip:"\u5c45\u4e2d\u5bf9\u9f50", checkable:true, listeners:{click:exec, afterSyncUI:function() {
-      var self = this;
-      editor.on("selectionChange", function() {
-        if(editor.get("mode") === Editor.Mode.SOURCE_MODE) {
-          return
-        }
-        if(editor.queryCommandValue("justifyCenter")) {
-          self.set("checked", true)
-        }else {
-          self.set("checked", false)
-        }
-      })
-    }}, mode:Editor.Mode.WYSIWYG_MODE});
-    editor.docReady(function() {
-      editor.get("document").on("keydown", function(e) {
-        if(e.ctrlKey && e.keyCode === S.Node.KeyCode.E) {
-          editor.execCommand("justifyCenter");
-          e.preventDefault()
-        }
-      })
-    })
-  }});
-  return justifyCenter
-});
-
+KISSY.add("editor/plugin/justify-center",["editor","./justify-center/cmd","./button","node"],function(j,c,k,f){function g(){var a=this.get("editor");a.execCommand("justifyCenter");a.focus()}function d(){}var e=c("editor"),h=c("./justify-center/cmd");c("./button");var i=c("node");d.prototype={pluginRenderUI:function(a){h.init(a);a.addButton("justifyCenter",{tooltip:"\u5c45\u4e2d\u5bf9\u9f50",checkable:!0,listeners:{click:g,afterSyncUI:function(){var b=this;a.on("selectionChange",function(){a.get("mode")!==e.Mode.SOURCE_MODE&&
+(a.queryCommandValue("justifyCenter")?b.set("checked",!0):b.set("checked",!1))})}},mode:e.Mode.WYSIWYG_MODE});a.docReady(function(){a.get("document").on("keydown",function(b){b.ctrlKey&&b.keyCode===i.Event.KeyCode.E&&(a.execCommand("justifyCenter"),b.preventDefault())})})}};f.exports=d});

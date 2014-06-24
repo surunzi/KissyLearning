@@ -1,66 +1,8 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:46
+build time: Jun 13 11:45
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/element-path
-*/
-
-KISSY.add("editor/plugin/element-path", ["editor"], function(S, require) {
-  var Editor = require("editor");
-  var Node = S.Node;
-  var CLASS = "editor-element-path";
-  function ElementPaths(cfg) {
-    var self = this;
-    self.cfg = cfg;
-    self._cache = [];
-    self._init()
-  }
-  S.augment(ElementPaths, {_init:function() {
-    var self = this, cfg = self.cfg, editor = cfg.editor;
-    self.holder = new Node("<span>");
-    self.holder.appendTo(editor.get("statusBarEl"), undefined);
-    editor.on("selectionChange", self._selectionChange, self);
-    Editor.Utils.sourceDisable(editor, self)
-  }, disable:function() {
-    this.holder.css("visibility", "hidden")
-  }, enable:function() {
-    this.holder.css("visibility", "")
-  }, _selectionChange:function(ev) {
-    var self = this, cfg = self.cfg, editor = cfg.editor, prefixCls = editor.get("prefixCls"), statusDom = self.holder, elementPath = ev.path, elements = elementPath.elements, element, i, cache = self._cache;
-    for(i = 0;i < cache.length;i++) {
-      cache[i].remove()
-    }
-    self._cache = [];
-    for(i = 0;i < elements.length;i++) {
-      element = elements[i];
-      var type = element.attr("_ke_real_element_type") || element.nodeName(), a = new Node("<a " + "href=\"javascript('" + type + "')\" " + 'class="' + prefixCls + CLASS + '">' + type + "</a>");
-      self._cache.push(a);
-      (function(element) {
-        a.on("click", function(ev2) {
-          ev2.halt();
-          editor.focus();
-          setTimeout(function() {
-            editor.getSelection().selectElement(element)
-          }, 50)
-        })
-      })(element);
-      statusDom.prepend(a)
-    }
-  }, destroy:function() {
-    this.holder.remove()
-  }});
-  function ElementPathPlugin() {
-  }
-  S.augment(ElementPathPlugin, {pluginRenderUI:function(editor) {
-    var elemPath = new ElementPaths({editor:editor});
-    editor.on("destroy", function() {
-      elemPath.destroy()
-    })
-  }});
-  return ElementPathPlugin
-});
-
+KISSY.add("editor/plugin/element-path",["editor","node"],function(l,e,m,j){function f(a){this.cfg=a;this._cache=[];this._init()}function c(){}var k=e("editor"),i=e("node");f.prototype={_init:function(){var a=this.cfg.editor;this.holder=i("<span>");this.holder.appendTo(a.get("statusBarEl"),void 0);a.on("selectionChange",this._selectionChange,this);k.Utils.sourceDisable(a,this)},disable:function(){this.holder.css("visibility","hidden")},enable:function(){this.holder.css("visibility","")},_selectionChange:function(a){var g=
+this.cfg.editor,e=g.get("prefixCls"),f=this.holder,a=a.path.elements,d,b;d=this._cache;for(b=0;b<d.length;b++)d[b].remove();this._cache=[];for(b=0;b<a.length;b++){d=a[b];var c=d.attr("_ke_real_element_type")||d.nodeName(),h=i("<a href=\"javascript('"+c+'\')" class="'+e+'editor-element-path">'+c+"</a>");this._cache.push(h);(function(a){h.on("click",function(b){b.halt();g.focus();setTimeout(function(){g.getSelection().selectElement(a)},50)})})(d);f.prepend(h)}},destroy:function(){this.holder.remove()}};
+c.prototype={pluginRenderUI:function(a){var c=new f({editor:a});a.on("destroy",function(){c.destroy()})}};j.exports=c});

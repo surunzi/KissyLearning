@@ -1,41 +1,7 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:49
+build time: Jun 13 11:47
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/menubutton
-*/
-
-KISSY.add("editor/plugin/menubutton", ["editor", "menubutton"], function(S, require) {
-  var Editor = require("editor");
-  var MenuButton = require("menubutton");
-  Editor.prototype.addSelect = function(id, cfg, SelectType) {
-    SelectType = SelectType || MenuButton.Select;
-    var self = this, prefixCls = self.get("prefixCls") + "editor-";
-    if(cfg) {
-      cfg.editor = self;
-      if(cfg.menu) {
-        cfg.menu.zIndex = Editor.baseZIndex(Editor.ZIndexManager.SELECT)
-      }
-      if(cfg.elCls) {
-        cfg.elCls = prefixCls + cfg.elCls
-      }
-    }
-    var s = (new SelectType(S.mix({render:self.get("toolBarEl"), prefixCls:prefixCls}, cfg))).render();
-    if(cfg.mode === Editor.Mode.WYSIWYG_MODE) {
-      self.on("wysiwygMode", function() {
-        s.set("disabled", false)
-      });
-      self.on("sourceMode", function() {
-        s.set("disabled", true)
-      })
-    }
-    self.addControl(id + "/select", s);
-    return s
-  };
-  return MenuButton
-});
-
+KISSY.add("editor/plugin/menubutton",["editor","util","menubutton"],function(j,b,k,h){var c=b("editor"),i=b("util"),f=b("menubutton");c.prototype.addSelect=function(b,a,e){var e=e||f.Select,g=this.get("prefixCls")+"editor-";if(a&&(a.editor=this,a.menu&&(a.menu.zIndex=c.baseZIndex(c.ZIndexManager.SELECT)),a.elCls))a.elCls=g+a.elCls;var d=(new e(i.mix({render:this.get("toolBarEl"),prefixCls:g},a))).render();a.mode===c.Mode.WYSIWYG_MODE&&(this.on("wysiwygMode",function(){d.set("disabled",!1)}),this.on("sourceMode",
+function(){d.set("disabled",!0)}));this.addControl(b+"/select",d);return d};h.exports=f});

@@ -1,31 +1,7 @@
 /*
-Copyright 2013, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Dec 4 22:18
+build time: Jun 13 11:54
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- split-button
-*/
-
-KISSY.add("split-button", ["component/container", "button", "menubutton"], function(S, require) {
-  var Container = require("component/container");
-  require("button");
-  require("menubutton");
-  return Container.extend({renderUI:function() {
-    var self = this, alignWithEl = self.get("alignWithEl"), menuButton = self.get("children")[1], menu = menuButton.get("menu");
-    if(alignWithEl) {
-      menu.get("align").node = self.$el
-    }
-  }}, {ATTRS:{handleMouseEvents:{value:false}, focusable:{value:false}, alignWithEl:{value:true}, children:{value:[{xclass:"button"}, {xclass:"menu-button"}]}, menuButton:{getter:function() {
-    return this.get("children")[1]
-  }, setter:function(v) {
-    this.get("children")[1] = v
-  }}, button:{getter:function() {
-    return this.get("children")[0]
-  }, setter:function(v) {
-    this.get("children")[0] = v
-  }}}, xclass:"split-button"})
-});
-
+KISSY.add("split-button",["component/container","button","menubutton"],function(b,a,e,c){b=a("component/container");a("button");a("menubutton");c.exports=b.extend({renderUI:function(){var d=this.get("alignWithEl"),a=this.get("children")[1].get("menu");d&&(a.get("align").node=this.$el)}},{ATTRS:{handleGestureEvents:{value:!1},focusable:{value:!1},alignWithEl:{value:!0},children:{value:[{xclass:"button"},{xclass:"menu-button"}]},menuButton:{getter:function(){return this.get("children")[1]},setter:function(a){this.get("children")[1]=
+a}},button:{getter:function(){return this.get("children")[0]},setter:function(a){this.get("children")[0]=a}}},xclass:"split-button"})});

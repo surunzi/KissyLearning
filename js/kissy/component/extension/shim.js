@@ -1,25 +1,6 @@
 /*
-Copyright 2013, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Dec 4 22:05
+build time: Jun 13 11:41
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- component/extension/shim
-*/
-
-KISSY.add("component/extension/shim", [], function(S) {
-  var ie6 = S.UA.ie === 6;
-  var shimTpl = "<" + 'iframe style="position: absolute;' + "border: none;" + "width: " + (ie6 ? "expression(this.parentNode.clientWidth)" : "100%") + ";" + "top: 0;" + "opacity: 0;" + "filter: alpha(opacity=0);" + "left: 0;" + "z-index: -1;" + "height: " + (ie6 ? "expression(this.parentNode.clientHeight)" : "100%") + ";" + '"/>';
-  function Shim() {
-  }
-  Shim.ATTRS = {shim:{value:ie6}};
-  Shim.prototype.__createDom = function() {
-    if(this.get("shim")) {
-      this.get("el").prepend(shimTpl)
-    }
-  };
-  return Shim
-});
-
+KISSY.add("component/extension/shim",["ua"],function(a,c,f,d){function b(){}var a=6===c("ua").ie,e='<iframe style="position: absolute;border: none;width: '+(a?"expression(this.parentNode.clientWidth)":"100%")+";top: 0;opacity: 0;filter: alpha(opacity=0);left: 0;z-index: -1;height: "+(a?"expression(this.parentNode.clientHeight)":"100%")+';"/>';b.ATTRS={shim:{value:a}};b.prototype.__createDom=function(){this.get("shim")&&this.get("el").prepend(e)};d.exports=b});
