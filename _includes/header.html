@@ -11,6 +11,9 @@
         {% endif %}
     </title>
     <link rel="stylesheet" href="{{ site.baseurl }}/css/style.css">
+    {% if page.extracss %}
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/{{ page.extracss }}.css">
+    {% endif %}
     <link rel="shortcut icon" href="{{ site.baseurl }}/favicon.ico">
 </head>
 <body>
