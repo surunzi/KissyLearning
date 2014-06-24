@@ -1,26 +1,6 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:51
+build time: Jun 13 11:49
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/undo
-*/
-
-KISSY.add("editor/plugin/undo", ["editor", "./undo/btn", "./undo/cmd", "./button"], function(S, require) {
-  var Editor = require("editor");
-  var Btn = require("./undo/btn");
-  var cmd = require("./undo/cmd");
-  require("./button");
-  function undo() {
-  }
-  S.augment(undo, {pluginRenderUI:function(editor) {
-    editor.addButton("undo", {mode:Editor.Mode.WYSIWYG_MODE, tooltip:"\u64a4\u9500", editor:editor}, Btn.UndoBtn);
-    editor.addButton("redo", {mode:Editor.Mode.WYSIWYG_MODE, tooltip:"\u91cd\u505a", editor:editor}, Btn.RedoBtn);
-    cmd.init(editor)
-  }});
-  return undo
-});
-
+KISSY.add("editor/plugin/undo",["editor","./undo/btn","./undo/cmd","./button"],function(h,b,i,f){function c(){}var d=b("editor"),e=b("./undo/btn"),g=b("./undo/cmd");b("./button");c.prototype={pluginRenderUI:function(a){a.addButton("undo",{mode:d.Mode.WYSIWYG_MODE,tooltip:"\u64a4\u9500",editor:a},e.UndoBtn);a.addButton("redo",{mode:d.Mode.WYSIWYG_MODE,tooltip:"\u91cd\u505a",editor:a},e.RedoBtn);g.init(a)}};f.exports=c});

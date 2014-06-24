@@ -1,49 +1,7 @@
 /*
-Copyright 2013, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Dec 4 22:05
+build time: Jun 13 11:42
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- cookie
-*/
-
-KISSY.add("cookie", [], function(S) {
-  var doc = S.Env.host.document, MILLISECONDS_OF_DAY = 24 * 60 * 60 * 1E3, encode = encodeURIComponent, decode = S.urlDecode;
-  function isNotEmptyString(val) {
-    return typeof val === "string" && val !== ""
-  }
-  S.Cookie = {get:function(name) {
-    var ret, m;
-    if(isNotEmptyString(name)) {
-      if(m = String(doc.cookie).match(new RegExp("(?:^| )" + name + "(?:(?:=([^;]*))|;|$)"))) {
-        ret = m[1] ? decode(m[1]) : ""
-      }
-    }
-    return ret
-  }, set:function(name, val, expires, domain, path, secure) {
-    var text = String(encode(val)), date = expires;
-    if(typeof date === "number") {
-      date = new Date;
-      date.setTime(date.getTime() + expires * MILLISECONDS_OF_DAY)
-    }
-    if(date instanceof Date) {
-      text += "; expires=" + date.toUTCString()
-    }
-    if(isNotEmptyString(domain)) {
-      text += "; domain=" + domain
-    }
-    if(isNotEmptyString(path)) {
-      text += "; path=" + path
-    }
-    if(secure) {
-      text += "; secure"
-    }
-    doc.cookie = name + "=" + text
-  }, remove:function(name, domain, path, secure) {
-    this.set(name, "", -1, domain, path, secure)
-  }};
-  return S.Cookie
-});
-
+KISSY.add("cookie",["util"],function(d,f,m,j){function g(b){return"string"===typeof b&&""!==b}var d=f("util"),h=document,k=encodeURIComponent,l=d.urlDecode;j.exports={get:function(b){var a,c;if(g(b)&&(c=(""+h.cookie).match(RegExp("(?:^| )"+b+"(?:(?:=([^;]*))|;|$)"))))a=c[1]?l(c[1]):"";return a},set:function(b,a,c,i,d,f){var a=""+k(a),e=c;"number"===typeof e&&(e=new Date,e.setTime(e.getTime()+864E5*c));e instanceof Date&&(a+="; expires="+e.toUTCString());g(i)&&(a+="; domain="+i);g(d)&&(a+="; path="+
+d);f&&(a+="; secure");h.cookie=b+"="+a},remove:function(b,a,c,d){this.set(b,"",-1,a,c,d)}}});

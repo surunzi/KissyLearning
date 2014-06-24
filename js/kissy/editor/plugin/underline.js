@@ -1,32 +1,6 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:51
+build time: Jun 13 11:49
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/underline
-*/
-
-KISSY.add("editor/plugin/underline", ["./font/ui", "./underline/cmd", "./button"], function(S, require) {
-  var ui = require("./font/ui");
-  var cmd = require("./underline/cmd");
-  require("./button");
-  function Underline() {
-  }
-  S.augment(Underline, {pluginRenderUI:function(editor) {
-    cmd.init(editor);
-    editor.addButton("underline", {cmdType:"underline", tooltip:"\u4e0b\u5212\u7ebf"}, ui.Button);
-    editor.docReady(function() {
-      editor.get("document").on("keydown", function(e) {
-        if(e.ctrlKey && e.keyCode === S.Node.KeyCode.U) {
-          editor.execCommand("underline");
-          e.preventDefault()
-        }
-      })
-    })
-  }});
-  return Underline
-});
-
+KISSY.add("editor/plugin/underline",["./font/ui","./underline/cmd","./button","node"],function(h,a,i,d){function c(){}var e=a("./font/ui"),f=a("./underline/cmd");a("./button");var g=a("node");c.prototype={pluginRenderUI:function(b){f.init(b);b.addButton("underline",{cmdType:"underline",tooltip:"\u4e0b\u5212\u7ebf"},e.Button);b.docReady(function(){b.get("document").on("keydown",function(a){a.ctrlKey&&a.keyCode===g.Event.KeyCode.U&&(b.execCommand("underline"),a.preventDefault())})})}};d.exports=c});

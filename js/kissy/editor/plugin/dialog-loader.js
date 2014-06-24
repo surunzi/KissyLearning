@@ -1,42 +1,7 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:45
+build time: Jun 13 11:44
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/dialog-loader
-*/
-
-KISSY.add("editor/plugin/dialog-loader", ["editor", "overlay"], function(S, require) {
-  var Editor = require("editor");
-  var Overlay = require("overlay");
-  var globalMask, loadMask = {loading:function(prefixCls) {
-    if(!globalMask) {
-      globalMask = new Overlay({x:0, width:S.UA.ie === 6 ? S.DOM.docWidth() : "100%", y:0, zIndex:Editor.baseZIndex(Editor.ZIndexManager.LOADING), prefixCls:prefixCls + "editor-", elCls:prefixCls + "editor-global-loading"})
-    }
-    globalMask.set("height", S.DOM.docHeight());
-    globalMask.show();
-    globalMask.loading()
-  }, unloading:function() {
-    globalMask.hide()
-  }};
-  return{useDialog:function(editor, name, config, args) {
-    editor.focus();
-    var prefixCls = editor.get("prefixCls");
-    if(editor.getControl(name + "/dialog")) {
-      setTimeout(function() {
-        editor.showDialog(name, args)
-      }, 0);
-      return
-    }
-    loadMask.loading(prefixCls);
-    S.use("editor/plugin/" + name + "/dialog", function(S, Dialog) {
-      loadMask.unloading();
-      editor.addControl(name + "/dialog", new Dialog(editor, config));
-      editor.showDialog(name, args)
-    })
-  }}
-});
-
+KISSY.add("editor/plugin/dialog-loader",["editor","overlay","dom","ua"],function(j,c,k,f){var e=c("editor"),h=c("overlay"),d=c("dom"),i=c("ua"),a,g={loading:function(b){a||(a=new h({x:0,width:6===i.ie?d.docWidth():"100%",y:0,zIndex:e.baseZIndex(e.ZIndexManager.LOADING),prefixCls:b+"editor-",elCls:b+"editor-global-loading"}));a.set("height",d.docHeight());a.show();a.loading()},unloading:function(){a.hide()}};f.exports={useDialog:function(b,a,e,d){b.focus();var f=b.get("prefixCls");b.getControl(a+"/dialog")?
+setTimeout(function(){b.showDialog(a,d)},0):(g.loading(f),c(["editor/plugin/"+a+"/dialog"],function(c){g.unloading();b.addControl(a+"/dialog",new c(b,e));b.showDialog(a,d)}))}}});

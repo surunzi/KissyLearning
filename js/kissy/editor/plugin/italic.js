@@ -1,32 +1,6 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:48
+build time: Jun 13 11:46
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/italic
-*/
-
-KISSY.add("editor/plugin/italic", ["./font/ui", "./italic/cmd", "./button"], function(S, require) {
-  var ui = require("./font/ui");
-  var cmd = require("./italic/cmd");
-  require("./button");
-  function italic() {
-  }
-  S.augment(italic, {pluginRenderUI:function(editor) {
-    cmd.init(editor);
-    editor.addButton("italic", {cmdType:"italic", tooltip:"\u659c\u4f53"}, ui.Button);
-    editor.docReady(function() {
-      editor.get("document").on("keydown", function(e) {
-        if(e.ctrlKey && e.keyCode === S.Node.KeyCode.I) {
-          editor.execCommand("italic");
-          e.preventDefault()
-        }
-      })
-    })
-  }});
-  return italic
-});
-
+KISSY.add("editor/plugin/italic",["./font/ui","./italic/cmd","./button","node"],function(h,a,i,d){function c(){}var e=a("./font/ui"),f=a("./italic/cmd");a("./button");var g=a("node");c.prototype={pluginRenderUI:function(b){f.init(b);b.addButton("italic",{cmdType:"italic",tooltip:"\u659c\u4f53"},e.Button);b.docReady(function(){b.get("document").on("keydown",function(a){a.ctrlKey&&a.keyCode===g.Event.KeyCode.I&&(b.execCommand("italic"),a.preventDefault())})})}};d.exports=c});

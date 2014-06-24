@@ -1,30 +1,6 @@
 /*
-Copyright 2013, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Dec 4 22:06
+build time: Jun 13 11:42
 */
-/**
- * i18n resources for date-picker
- * @ignore
- * @author yiminghe@gmail.com
- */
-KISSY.add('date/picker/i18n/zh-cn', {
-    today: '今天',
-    clear: '清除',
-    previousMonth: '上个月 (翻页上键)',
-    nextMonth: '下个月 (翻页下键)',
-    monthSelect: '选择月份',
-    yearSelect: '选择年份',
-    decadeSelect: '选择年代',
-    /*jshint quotmark: false*/
-    yearFormat: "yyyy'年'",
-    monthYearFormat: "yyyy'年'M'月'",
-    dateFormat: "yyyy'年'M'月'd'日'",
-    previousYear: '上一年 (Control键加左方向键)',
-    nextYear: '下一年 (Control键加右方向键)',
-    previousDecade: '上一年代',
-    nextDecade: '下一年代',
-    previousCentury: '上一世纪',
-    nextCentury: '下一世纪',
-    veryShortWeekdays: ['日', '一', '二', '三', '四', '五', '六']
-});
+KISSY.add("date/picker/i18n/zh-cn",[],function(b,c,d,a){a.exports={today:"\u4eca\u5929",clear:"\u6e05\u9664",previousMonth:"\u4e0a\u4e2a\u6708 (\u7ffb\u9875\u4e0a\u952e)",nextMonth:"\u4e0b\u4e2a\u6708 (\u7ffb\u9875\u4e0b\u952e)",monthSelect:"\u9009\u62e9\u6708\u4efd",yearSelect:"\u9009\u62e9\u5e74\u4efd",decadeSelect:"\u9009\u62e9\u5e74\u4ee3",yearFormat:"yyyy'\u5e74'",monthYearFormat:"yyyy'\u5e74'M'\u6708'",dateFormat:"yyyy'\u5e74'M'\u6708'd'\u65e5'",previousYear:"\u4e0a\u4e00\u5e74 (Control\u952e\u52a0\u5de6\u65b9\u5411\u952e)",nextYear:"\u4e0b\u4e00\u5e74 (Control\u952e\u52a0\u53f3\u65b9\u5411\u952e)",previousDecade:"\u4e0a\u4e00\u5e74\u4ee3",nextDecade:"\u4e0b\u4e00\u5e74\u4ee3",previousCentury:"\u4e0a\u4e00\u4e16\u7eaa",nextCentury:"\u4e0b\u4e00\u4e16\u7eaa",veryShortWeekdays:"\u65e5,\u4e00,\u4e8c,\u4e09,\u56db,\u4e94,\u516d".split(",")}});

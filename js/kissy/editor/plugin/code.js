@@ -1,25 +1,6 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:45
+build time: Jun 13 11:44
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/code
-*/
-
-KISSY.add("editor/plugin/code", ["editor", "./button", "./dialog-loader"], function(S, require) {
-  var Editor = require("editor");
-  require("./button");
-  var DialogLoader = require("./dialog-loader");
-  function CodePlugin() {
-  }
-  S.augment(CodePlugin, {pluginRenderUI:function(editor) {
-    editor.addButton("code", {tooltip:"\u63d2\u5165\u4ee3\u7801", listeners:{click:function() {
-      DialogLoader.useDialog(editor, "code")
-    }}, mode:Editor.Mode.WYSIWYG_MODE})
-  }});
-  return CodePlugin
-});
-
+KISSY.add("editor/plugin/code",["editor","./button","./dialog-loader"],function(f,a,g,c){function b(){}var d=a("editor");a("./button");var e=a("./dialog-loader");b.prototype={pluginRenderUI:function(a){a.addButton("code",{tooltip:"\u63d2\u5165\u4ee3\u7801",listeners:{click:function(){e.useDialog(a,"code")}},mode:d.Mode.WYSIWYG_MODE})}};c.exports=b});

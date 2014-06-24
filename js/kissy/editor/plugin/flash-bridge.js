@@ -1,83 +1,8 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:46
+build time: Jun 13 11:45
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/flash-bridge
-*/
-
-KISSY.add("editor/plugin/flash-bridge", ["editor", "swf", "event"], function(S, require) {
-  var Editor = require("editor");
-  var SWF = require("swf");
-  var Event = require("event");
-  var instances = {};
-  var logger = S.getLogger("s/editor/plugin/flash-bridge");
-  function FlashBridge(cfg) {
-    this._init(cfg)
-  }
-  S.augment(FlashBridge, Event.Target, {_init:function(cfg) {
-    var self = this, id = S.guid("flash-bridge-"), callback = "KISSY.require('editor').FlashBridge.EventHandler";
-    cfg.id = id;
-    cfg.attrs = cfg.attrs || {};
-    cfg.params = cfg.params || {};
-    var attrs = cfg.attrs, params = cfg.params, flashVars = params.flashVars = params.flashVars || {};
-    S.mix(attrs, {width:1, height:1}, false);
-    S.mix(params, {allowScriptAccess:"always", allowNetworking:"all", scale:"noScale"}, false);
-    S.mix(flashVars, {shareData:false, useCompression:false}, false);
-    var swfCore = {YUISwfId:id, YUIBridgeCallback:callback};
-    if(cfg.ajbridge) {
-      swfCore = {swfID:id, jsEntry:callback}
-    }
-    S.mix(flashVars, swfCore);
-    instances[id] = self;
-    self.id = id;
-    self.swf = new SWF(cfg);
-    self._expose(cfg.methods)
-  }, _expose:function(methods) {
-    var self = this;
-    for(var i = 0;i < methods.length;i++) {
-      var m = methods[i];
-      (function(m) {
-        self[m] = function() {
-          return self._callSWF(m, S.makeArray(arguments))
-        }
-      })(m)
-    }
-  }, _callSWF:function(func, args) {
-    return this.swf.callSWF(func, args)
-  }, _eventHandler:function(event) {
-    var self = this, type = event.type;
-    if(type === "log") {
-      logger.debug(event.message)
-    }else {
-      if(type) {
-        self.fire(type, event)
-      }
-    }
-  }, ready:function(fn) {
-    var self = this;
-    if(self._ready) {
-      fn.call(this)
-    }else {
-      self.on("contentReady", fn)
-    }
-  }, destroy:function() {
-    this.swf.destroy();
-    delete instances[this.id]
-  }});
-  FlashBridge.EventHandler = function(id, event) {
-    logger.debug("fire event: " + event.type);
-    var instance = instances[id];
-    if(instance) {
-      setTimeout(function() {
-        instance._eventHandler.call(instance, event)
-      }, 100)
-    }
-  };
-  Editor.FlashBridge = FlashBridge;
-  return FlashBridge
-});
-
+KISSY.add("editor/plugin/flash-bridge",["logger-manager","util","editor","swf","event/custom"],function(h,d,k,i){function e(a){this._init(a)}d("logger-manager");var f=d("util"),h=d("editor"),j=d("swf"),d=d("event/custom"),g={};f.augment(e,d.Target,{_init:function(a){var b=f.guid("flash-bridge-");a.id=b;a.attrs=a.attrs||{};a.params=a.params||{};var c=a.attrs,d=a.params,e=d.flashVars=d.flashVars||{};f.mix(c,{width:1,height:1},!1);f.mix(d,{allowScriptAccess:"always",allowNetworking:"all",scale:"noScale"},
+!1);f.mix(e,{shareData:!1,useCompression:!1},!1);c={YUISwfId:b,YUIBridgeCallback:"KISSY.require('editor').FlashBridge.EventHandler"};a.ajbridge&&(c={swfID:b,jsEntry:"KISSY.require('editor').FlashBridge.EventHandler"});f.mix(e,c);g[b]=this;this.id=b;this.swf=new j(a);this._expose(a.methods)},_expose:function(a){for(var b=this,c=0;c<a.length;c++)(function(a){b[a]=function(){return b._callSWF(a,f.makeArray(arguments))}})(a[c])},_callSWF:function(a,b){return this.swf.callSWF(a,b)},_eventHandler:function(a){var b=
+a.type;"log"!==b&&b&&this.fire(b,a)},ready:function(a){if(this._ready)a.call(this);else this.on("contentReady",a)},destroy:function(){this.swf.destroy();delete g[this.id]}});e.EventHandler=function(a,b){var c=g[a];c&&setTimeout(function(){c._eventHandler.call(c,b)},100)};h.FlashBridge=e;i.exports=e});

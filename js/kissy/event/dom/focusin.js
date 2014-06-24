@@ -1,40 +1,7 @@
 /*
-Copyright 2013, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Dec 4 22:15
+build time: Jun 13 11:50
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- event/dom/focusin
-*/
-
-KISSY.add("event/dom/focusin", ["event/dom/base"], function(S, require) {
-  var DomEvent = require("event/dom/base");
-  var Special = DomEvent.Special;
-  S.each([{name:"focusin", fix:"focus"}, {name:"focusout", fix:"blur"}], function(o) {
-    var key = S.guid("attaches_" + S.now() + "_");
-    Special[o.name] = {setup:function() {
-      var doc = this.ownerDocument || this;
-      if(!(key in doc)) {
-        doc[key] = 0
-      }
-      doc[key] += 1;
-      if(doc[key] === 1) {
-        doc.addEventListener(o.fix, handler, true)
-      }
-    }, tearDown:function() {
-      var doc = this.ownerDocument || this;
-      doc[key] -= 1;
-      if(doc[key] === 0) {
-        doc.removeEventListener(o.fix, handler, true)
-      }
-    }};
-    function handler(event) {
-      var target = event.target;
-      return DomEvent.fire(target, o.name)
-    }
-  });
-  return DomEvent
-});
-
+KISSY.add("event/dom/focusin",["event/dom/base","util"],function(h,c){var f=c("event/dom/base"),g=f.Special,e=c("util");e.each([{name:"focusin",fix:"focus"},{name:"focusout",fix:"blur"}],function(d){function c(a){return f.fire(a.target,d.name)}var b=e.guid("attaches_"+e.now()+"_");g[d.name]={setup:function(){var a=this.ownerDocument||this;b in a||(a[b]=0);a[b]+=1;1===a[b]&&a.addEventListener(d.fix,c,!0)},tearDown:function(){var a=this.ownerDocument||this;a[b]-=1;0===a[b]&&a.removeEventListener(d.fix,
+c,!0)}}})});

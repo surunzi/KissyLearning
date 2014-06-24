@@ -1,27 +1,6 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:47
+build time: Jun 13 11:46
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/fore-color/cmd
-*/
-
-KISSY.add("editor/plugin/fore-color/cmd", ["../color/cmd"], function(S, require) {
-  var cmd = require("../color/cmd");
-  var COLOR_STYLES = {element:"span", styles:{color:"#(color)"}, overrides:[{element:"font", attributes:{color:null}}], childRule:function(el) {
-    return!(el.nodeName() === "a" || el.all("a").length)
-  }};
-  return{init:function(editor) {
-    if(!editor.hasCommand("foreColor")) {
-      editor.addCommand("foreColor", {exec:function(editor, c) {
-        editor.execCommand("save");
-        cmd.applyColor(editor, c, COLOR_STYLES);
-        editor.execCommand("save")
-      }})
-    }
-  }}
-});
-
+KISSY.add("editor/plugin/fore-color/cmd",["../color/cmd"],function(f,b,g,c){var d=b("../color/cmd"),e={element:"span",styles:{color:"#(color)"},overrides:[{element:"font",attributes:{color:null}}],childRule:function(a){return!("a"===a.nodeName()||a.all("a").length)}};c.exports={init:function(a){a.hasCommand("foreColor")||a.addCommand("foreColor",{exec:function(a,b){a.execCommand("save");d.applyColor(a,b,e);a.execCommand("save")}})}}});

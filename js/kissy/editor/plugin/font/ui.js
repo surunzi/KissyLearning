@@ -1,70 +1,8 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:47
+build time: Jun 13 11:46
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/font/ui
-*/
-
-KISSY.add("editor/plugin/font/ui", ["editor", "../button", "../menubutton"], function(S, require) {
-  var Editor = require("editor");
-  var Button = require("../button");
-  var MenuButton = require("../menubutton");
-  var FontSelect = MenuButton.Select.extend({initializer:function() {
-    var self = this, editor = self.get("editor");
-    self.on("click", function(ev) {
-      var v = ev.target.get("value"), cmdType = self.get("cmdType");
-      editor.execCommand(cmdType, v)
-    });
-    editor.on("selectionChange", function() {
-      if(editor.get("mode") === Editor.Mode.SOURCE_MODE) {
-        return
-      }
-      var cmdType = self.get("cmdType"), menu = self.get("menu"), children = menu.get && menu.get("children");
-      if(children) {
-        var currentValue = editor.queryCommandValue(cmdType);
-        if(currentValue !== false) {
-          currentValue = (currentValue + "").toLowerCase();
-          for(var j = 0;j < children.length;j++) {
-            var item = children[j];
-            var value = item.get("value");
-            if(currentValue === value.toLowerCase()) {
-              self.set("value", value);
-              return
-            }
-          }
-        }
-        self.set("value", null)
-      }
-    })
-  }});
-  var FontButton = Button.extend({initializer:function() {
-    var self = this, editor = self.get("editor"), cmdType = self.get("cmdType");
-    self.on("click", function() {
-      var checked = self.get("checked");
-      if(checked) {
-        editor.execCommand(cmdType);
-        editor.focus()
-      }else {
-        editor.execCommand(cmdType, false);
-        editor.focus()
-      }
-    });
-    editor.on("selectionChange", function() {
-      if(editor.get("mode") === Editor.Mode.SOURCE_MODE) {
-        return
-      }
-      var cmdType = self.get("cmdType");
-      if(editor.queryCommandValue(cmdType)) {
-        self.set("checked", true)
-      }else {
-        self.set("checked", false)
-      }
-    })
-  }}, {ATTRS:{checkable:{value:true}, mode:{value:Editor.Mode.WYSIWYG_MODE}}});
-  return{Button:FontButton, Select:FontSelect}
-});
-
+KISSY.add("editor/plugin/font/ui",["editor","../button","../menubutton"],function(e,d,i,h){var g=d("editor"),e=d("../button"),d=d("../menubutton").Select.extend({initializer:function(){var a=this,c=a.get("editor");a.on("click",function(b){var b=b.target.get("value"),f=a.get("cmdType");c.execCommand(f,b)});c.on("selectionChange",function(){if(c.get("mode")!==g.Mode.SOURCE_MODE){var b=a.get("cmdType"),f=a.get("menu");if(f=f.get&&f.get("children")){b=c.queryCommandValue(b);if(!1!==b)for(var b=(b+"").toLowerCase(),
+d=0;d<f.length;d++){var e=f[d].get("value");if(b===e.toLowerCase()){a.set("value",e);return}}a.set("value",null)}}})}}),e=e.extend({initializer:function(){var a=this,c=a.get("editor"),b=a.get("cmdType");a.on("click",function(){a.get("checked")?c.execCommand(b):c.execCommand(b,!1);c.focus()});c.on("selectionChange",function(){if(c.get("mode")!==g.Mode.SOURCE_MODE){var b=a.get("cmdType");c.queryCommandValue(b)?a.set("checked",!0):a.set("checked",!1)}})}},{ATTRS:{checkable:{value:!0},mode:{value:g.Mode.WYSIWYG_MODE}}});
+h.exports={Button:e,Select:d}});

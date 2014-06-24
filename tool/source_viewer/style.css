@@ -1,0 +1,52 @@
+* {
+    font-family: 微软雅黑;
+}
+
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+#input-function {
+    border: 1px solid #eee;
+    padding: 5px;
+}
+
+#input-module {
+    border: 1px solid #eee;
+    padding: 4px;
+}
+
+/* codemirror */
+.CodeMirror {
+    border: 1px solid #eee;
+    position: absolute;
+    left: 0;
+    top: 50px;
+}
+
+.CodeMirror-scroll {
+    overflow-y: hidden;
+    overflow-x: auto;
+}
+
+.cm-s-solarized.cm-s-light .CodeMirror-gutters {
+    background-image: none;
+    background-color: #09c;
+    box-shadow: none;
+    height: 100%;
+}
+
+.cm-s-solarized.cm-s-light {
+    background-color: #fff;
+    background-image: none;
+}
+
+.cm-s-solarized .CodeMirror-linenumber {
+    color: #fff;
+    text-shadow: none;
+}
+
+.cm-s-solarized.CodeMirror {
+    box-shadow: none;
+}

@@ -24,7 +24,7 @@
         }
         return member.apply(obj, args || []);
     }
-</code></pre><p>从callSuper的源代码可以知道，callSuper首先获取到调用它的函数method和其函数名name。然后再通过method.__owner__获取到其所在的类构造方法，之后在通过该类构造方法的superclass得到method所在对象的原型，最后再调用原型中的同名方法。当然，方法中的__name__和__owner__等属性都是在用extend方法创建类时就添加上去的。</p><p>PS：本站停更。考完分布式计算还有嵌入式课程设计答完辩后再回来继续更=_=</p></div><div id="post-disqus-container"><div id="disqus_thread"></div></div></div><div id="footer" class="container"><div class="inner"><span class="copyright">&copy; Kissy Learning 2014</span></div></div><script src="http://surunzi.github.io/KissyLearning/js/kissy/seed-min.js"></script><script src="http://surunzi.github.io/KissyLearning/js/KissyLearning.js"></script></body></html><script type="text/javascript">var disqus_shortname = 'kissylearning';
+</code></pre><p>从callSuper的源代码可以知道，callSuper首先获取到调用它的函数method和其函数名name。然后再通过method.__owner__获取到其所在的类构造方法，之后在通过该类构造方法的superclass得到method所在对象的原型，最后再调用原型中的同名方法。当然，方法中的__name__和__owner__等属性都是在用extend方法创建类时就添加上去的。</p><p>PS：本站停更。考完分布式计算还有嵌入式课程设计答完辩后再回来继续更=_=</p></div><div id="post-disqus-container"><div id="disqus_thread"></div></div></div><div id="footer" class="container"><div class="inner"><span class="copyright">&copy; Kissy Learning 2014</span></div></div><script src="http://surunzi.github.io/KissyLearning/js/kissy/seed.js"></script><script src="http://surunzi.github.io/KissyLearning/js/KissyLearning.js"></script></body></html><script type="text/javascript">var disqus_shortname = 'kissylearning';
 var disqus_url = 'http://surunzi.github.io/KissyLearning/learning-notes/2014/06/12/things-behind-call-super/';
 (function() {
 var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

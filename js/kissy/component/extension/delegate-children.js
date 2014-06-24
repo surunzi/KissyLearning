@@ -1,78 +1,8 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Feb 25 15:53
+build time: Jun 13 11:41
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- component/extension/delegate-children
-*/
-
-KISSY.add("component/extension/delegate-children", ["node", "component/manager"], function(S, require) {
-  var Node = require("node"), Manager = require("component/manager");
-  var UA = S.UA, ie = UA.ieMode, Features = S.Features, Gesture = Node.Gesture, isTouchEventSupported = Features.isTouchEventSupported();
-  function onRenderChild(e) {
-    if(e.target === this) {
-      var child = e.component, el = child.$el;
-      el.addClass(this.__childClsTag)
-    }
-  }
-  function onRemoveChild(e) {
-    if(e.target === this) {
-      var child = e.component, el = child.$el;
-      if(el) {
-        el.removeClass(this.__childClsTag)
-      }
-    }
-  }
-  function DelegateChildren() {
-    var self = this;
-    self.__childClsTag = S.guid("ks-component-child");
-    self.on("afterRenderChild", onRenderChild, self).on("afterRemoveChild", onRemoveChild, self)
-  }
-  S.augment(DelegateChildren, {handleChildrenEvents:function(e) {
-    if(!this.get("disabled")) {
-      var control = this.getOwnerControl(e);
-      if(control && !control.get("disabled")) {
-        e.stopPropagation();
-        switch(e.type) {
-          case Gesture.start:
-            control.handleMouseDown(e);
-            break;
-          case Gesture.end:
-            control.handleMouseUp(e);
-            break;
-          case Gesture.tap:
-            control.handleClick(e);
-            break;
-          case "mouseenter":
-            control.handleMouseEnter(e);
-            break;
-          case "mouseleave":
-            control.handleMouseLeave(e);
-            break;
-          case "contextmenu":
-            control.handleContextMenu(e);
-            break;
-          case "dblclick":
-            control.handleDblClick(e);
-            break;
-          default:
-            S.error(e.type + " unhandled!")
-        }
-      }
-    }
-  }, __bindUI:function() {
-    var self = this, events = Gesture.start + " " + Gesture.end + " " + Gesture.tap;
-    if(Gesture.cancel) {
-      events += " " + Gesture.cancel
-    }
-    events += " mouseenter mouseleave contextmenu " + (ie && ie < 9 ? "dblclick " : "");
-    self.$el.delegate(events, "." + self.__childClsTag, self.handleChildrenEvents, self)
-  }, getOwnerControl:function(e) {
-    return Manager.getComponent(e.currentTarget.id)
-  }});
-  return DelegateChildren
-});
-
+KISSY.add("component/extension/delegate-children",["component/control","event/gesture/basic","event/gesture/tap"],function(l,d,m,g){function h(a){a.target===this&&a.component.$el.addClass(this.__childClsTag)}function i(a){a.target===this&&(a=a.component.$el)&&a.removeClass(this.__childClsTag)}function e(){this.__childClsTag="ks-component-child"+j++;this.on("afterRenderChild",h,this).on("afterRemoveChild",i,this)}var k=d("component/control").Manager,c=d("event/gesture/basic"),f=d("event/gesture/tap"),
+j=1;e.prototype={handleChildrenEvents:function(a){if(!this.get("disabled")){var b=this.getOwnerControl(a);if(b&&!b.get("disabled"))switch(a.type){case c.START:b.handleMouseDown(a);break;case c.END:b.handleMouseUp(a);break;case f.TAP:b.handleClick(a);break;case "mouseenter":b.handleMouseEnter(a);break;case "mouseleave":b.handleMouseLeave(a);break;case "contextmenu":b.handleContextMenu(a);break;default:throw Error(a.type+" unhandled!");}}},__bindUI:function(){var a=c.START+" "+c.END+" "+f.TAP;this.$el.delegate(a+
+" mouseenter mouseleave contextmenu","."+this.__childClsTag,this.handleChildrenEvents,this)},getOwnerControl:function(a){return k.getComponent(a.currentTarget.id)}};g.exports=e});

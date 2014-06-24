@@ -1,24 +1,6 @@
 /*
-Copyright 2013, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Dec 4 22:18
+build time: Jun 13 11:53
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- separator/render
- separator
-*/
-
-KISSY.add("separator/render", ["component/control"], function(S, require) {
-  var Control = require("component/control");
-  return Control.getDefaultRender().extend({beforeCreateDom:function(renderData) {
-    renderData.elAttrs.role = "separator"
-  }})
-});
-KISSY.add("separator", ["component/control", "separator/render"], function(S, require) {
-  var Control = require("component/control");
-  var SeparatorRender = require("separator/render");
-  return Control.extend({}, {ATTRS:{focusable:{value:false}, disabled:{value:true}, handleMouseEvents:{value:false}, xrender:{value:SeparatorRender}}, xclass:"separator"})
-});
-
+KISSY.add("separator",["component/control"],function(a,b,d,c){a=b("component/control");c.exports=a.extend({beforeCreateDom:function(a){a.elAttrs.role="separator"}},{ATTRS:{focusable:{value:!1},disabled:{value:!0},handleGestureEvents:{value:!1}},xclass:"separator"})});

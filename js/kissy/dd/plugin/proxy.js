@@ -1,61 +1,7 @@
 /*
-Copyright 2013, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Dec 4 22:06
+build time: Jun 13 11:43
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- dd/plugin/proxy
-*/
-
-KISSY.add("dd/plugin/proxy", ["node", "dd", "base"], function(S, require) {
-  var Node = require("node"), DD = require("dd"), Base = require("base");
-  var DDM = DD.DDM, PROXY_EVENT = ".-ks-proxy" + S.now();
-  return Base.extend({pluginId:"dd/plugin/proxy", pluginInitializer:function(drag) {
-    var self = this, hideNodeOnDrag = self.get("hideNodeOnDrag");
-    function start() {
-      var node = self.get("node"), dragNode = drag.get("node");
-      if(!self.get("proxyNode")) {
-        if(typeof node === "function") {
-          node = node(drag);
-          node.addClass("ks-dd-proxy");
-          self.set("proxyNode", node)
-        }
-      }else {
-        node = self.get("proxyNode")
-      }
-      node.show();
-      dragNode.parent().append(node);
-      DDM.cacheWH(node);
-      node.offset(dragNode.offset());
-      drag.setInternal("dragNode", dragNode);
-      drag.setInternal("node", node);
-      if(hideNodeOnDrag) {
-        dragNode.css("visibility", "hidden")
-      }
-    }
-    function end() {
-      var node = self.get("proxyNode"), dragNode = drag.get("dragNode");
-      if(self.get("moveOnEnd")) {
-        dragNode.offset(node.offset())
-      }
-      if(self.get("destroyOnEnd")) {
-        node.remove();
-        self.set("proxyNode", 0)
-      }else {
-        node.hide()
-      }
-      drag.setInternal("node", dragNode);
-      if(hideNodeOnDrag) {
-        dragNode.css("visibility", "")
-      }
-    }
-    drag.on("dragstart" + PROXY_EVENT, start).on("dragend" + PROXY_EVENT, end)
-  }, pluginDestructor:function(drag) {
-    drag.detach(PROXY_EVENT)
-  }}, {ATTRS:{node:{value:function(drag) {
-    return new Node(drag.get("node").clone(true))
-  }}, hideNodeOnDrag:{value:false}, destroyOnEnd:{value:false}, moveOnEnd:{value:true}, proxyNode:{}}})
-});
-
+KISSY.add("dd/plugin/proxy",["dd","base"],function(g,e,j,h){var g=e("dd"),e=e("base"),i=g.DDM,f=".-ks-proxy"+ +new Date;h.exports=e.extend({pluginId:"dd/plugin/proxy",pluginInitializer:function(b){var c=this;b.on("dragstart"+f,function(){var a=c.get("node"),d=b.get("node");c.get("proxyNode")?a=c.get("proxyNode"):"function"===typeof a&&(a=a(b),a.addClass("ks-dd-proxy"),c.set("proxyNode",a));a.show();d.parent().append(a);i.cacheWH(a);a.offset(d.offset());b.setInternal("dragNode",d);b.setInternal("node",
+a)}).on("dragend"+f,function(){var a=c.get("proxyNode"),d=b.get("dragNode");c.get("moveOnEnd")&&d.offset(a.offset());c.get("destroyOnEnd")?(a.remove(),c.set("proxyNode",0)):a.hide();b.setInternal("node",d)})},pluginDestructor:function(b){b.detach(f)}},{ATTRS:{node:{value:function(b){return b.get("node").clone(!0)}},destroyOnEnd:{value:!1},moveOnEnd:{value:!0},proxyNode:{}}})});

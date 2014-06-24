@@ -1,39 +1,7 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:50
+build time: Jun 13 11:48
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/preview
-*/
-
-KISSY.add("editor/plugin/preview", ["./button"], function(S, require) {
-  var win = window;
-  require("./button");
-  function Preview() {
-  }
-  S.augment(Preview, {pluginRenderUI:function(editor) {
-    editor.addButton("preview", {tooltip:"\u9884\u89c8", listeners:{click:function() {
-      var iWidth, iHeight, iLeft;
-      try {
-        var screen = win.screen;
-        iHeight = Math.round(screen.height * 0.7);
-        iLeft = Math.round(screen.width * 0.1);
-        iWidth = Math.round(screen.width * 0.8)
-      }catch(e) {
-        iWidth = 640;
-        iHeight = 420;
-        iLeft = 80
-      }
-      var sHTML = S.substitute(editor.getDocHtml(), {title:"\u9884\u89c8"}), sOpenUrl = "", oWindow = win.open(sOpenUrl, "", "toolbar=yes," + "location=no," + "status=yes," + "menubar=yes," + "scrollbars=yes," + "resizable=yes," + "width=" + iWidth + ",height=" + iHeight + ",left=" + iLeft), winDoc = oWindow.document;
-      winDoc.open();
-      winDoc.write(sHTML);
-      winDoc.close();
-      oWindow.focus()
-    }}})
-  }});
-  return Preview
-});
-
+KISSY.add("editor/plugin/preview",["./button","util"],function(j,c,k,h){function e(){}var g=window;c("./button");var i=c("util");e.prototype={pluginRenderUI:function(c){c.addButton("preview",{tooltip:"\u9884\u89c8",listeners:{click:function(){var b,a,f;try{var d=g.screen;a=Math.round(0.7*d.height);f=Math.round(0.1*d.width);b=Math.round(0.8*d.width)}catch(e){b=640,a=420,f=80}d=i.substitute(c.getDocHtml(),{title:"\u9884\u89c8"});b=g.open("","","toolbar=yes,location=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width="+
+b+",height="+a+",left="+f);a=b.document;a.open();a.write(d);a.close();b.focus()}}})}};h.exports=e});

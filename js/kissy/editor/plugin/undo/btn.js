@@ -1,55 +1,7 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:51
+build time: Jun 13 11:49
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/undo/btn
-*/
-
-KISSY.add("editor/plugin/undo/btn", ["../button", "editor"], function(S, require) {
-  var Button = require("../button");
-  var Editor = require("editor");
-  var UndoBtn = Button.extend({__lock:true, bindUI:function() {
-    var self = this, editor = self.get("editor");
-    self.on("click", function() {
-      editor.execCommand("undo")
-    });
-    editor.on("afterUndo afterRedo afterSave", function(ev) {
-      var index = ev.index;
-      if(index > 0) {
-        self.set("disabled", self.__lock = false)
-      }else {
-        self.set("disabled", self.__lock = true)
-      }
-    })
-  }}, {ATTRS:{mode:{value:Editor.Mode.WYSIWYG_MODE}, disabled:{value:true, setter:function(v) {
-    if(this.__lock) {
-      v = true
-    }
-    return v
-  }}}});
-  var RedoBtn = Button.extend({__lock:true, bindUI:function() {
-    var self = this, editor = self.get("editor");
-    self.on("click", function() {
-      editor.execCommand("redo")
-    });
-    editor.on("afterUndo afterRedo afterSave", function(ev) {
-      var history = ev.history, index = ev.index;
-      if(index < history.length - 1) {
-        self.set("disabled", self.__lock = false)
-      }else {
-        self.set("disabled", self.__lock = true)
-      }
-    })
-  }}, {ATTRS:{mode:{value:Editor.Mode.WYSIWYG_MODE}, disabled:{value:true, setter:function(v) {
-    if(this.__lock) {
-      v = true
-    }
-    return v
-  }}}});
-  return{RedoBtn:RedoBtn, UndoBtn:UndoBtn}
-});
-
+KISSY.add("editor/plugin/undo/btn",["../button","editor"],function(b,c,d,e){b=c("../button");d=c("editor");c=b.extend({__lock:!0,bindUI:function(){var a=this,b=a.get("editor");a.on("click",function(){b.execCommand("undo")});b.on("afterUndo afterRedo afterSave",function(b){0<b.index?a.set("disabled",a.__lock=!1):a.set("disabled",a.__lock=!0)})}},{ATTRS:{mode:{value:d.Mode.WYSIWYG_MODE},disabled:{value:!0,setter:function(a){this.__lock&&(a=!0);return a}}}});b=b.extend({__lock:!0,bindUI:function(){var a=
+this,b=a.get("editor");a.on("click",function(){b.execCommand("redo")});b.on("afterUndo afterRedo afterSave",function(b){b.index<b.history.length-1?a.set("disabled",a.__lock=!1):a.set("disabled",a.__lock=!0)})}},{ATTRS:{mode:{value:d.Mode.WYSIWYG_MODE},disabled:{value:!0,setter:function(a){this.__lock&&(a=!0);return a}}}});e.exports={RedoBtn:b,UndoBtn:c}});

@@ -1,39 +1,6 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:50
+build time: Jun 13 11:48
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/source-area
-*/
-
-KISSY.add("editor/plugin/source-area", ["editor", "./button"], function(S, require) {
-  var Editor = require("editor");
-  require("./button");
-  var SOURCE_MODE = Editor.Mode.SOURCE_MODE, WYSIWYG_MODE = Editor.Mode.WYSIWYG_MODE;
-  function sourceArea() {
-  }
-  S.augment(sourceArea, {pluginRenderUI:function(editor) {
-    editor.addButton("sourceArea", {tooltip:"\u6e90\u7801", listeners:{afterSyncUI:function() {
-      var self = this;
-      editor.on("wysiwygMode", function() {
-        self.set("checked", false)
-      });
-      editor.on("sourceMode", function() {
-        self.set("checked", true)
-      })
-    }, click:function() {
-      var self = this;
-      var checked = self.get("checked");
-      if(checked) {
-        editor.set("mode", SOURCE_MODE)
-      }else {
-        editor.set("mode", WYSIWYG_MODE)
-      }
-    }}, checkable:true})
-  }});
-  return sourceArea
-});
-
+KISSY.add("editor/plugin/source-area",["editor","./button"],function(a,c,h,e){function d(){}a=c("editor");c("./button");var f=a.Mode.SOURCE_MODE,g=a.Mode.WYSIWYG_MODE;d.prototype={pluginRenderUI:function(b){b.addButton("sourceArea",{tooltip:"\u6e90\u7801",listeners:{afterSyncUI:function(){var a=this;b.on("wysiwygMode",function(){a.set("checked",!1)});b.on("sourceMode",function(){a.set("checked",!0)})},click:function(){this.get("checked")?b.set("mode",f):b.set("mode",g)}},checkable:!0})}};e.exports=d});

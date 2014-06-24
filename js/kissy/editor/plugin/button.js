@@ -1,44 +1,7 @@
 /*
-Copyright 2014, KISSY v1.42
+Copyright 2014, KISSY v5.0.0
 MIT Licensed
-build time: Jan 6 12:45
+build time: Jun 13 11:44
 */
-/*
- Combined processedModules by KISSY Module Compiler: 
-
- editor/plugin/button
-*/
-
-KISSY.add("editor/plugin/button", ["editor", "button"], function(S, require) {
-  var Editor = require("editor");
-  var Button = require("button");
-  Editor.prototype.addButton = function(id, cfg, ButtonType) {
-    if(ButtonType === undefined) {
-      ButtonType = Button
-    }
-    var self = this, prefixCls = self.get("prefixCls") + "editor-toolbar-";
-    if(cfg.elCls) {
-      cfg.elCls = prefixCls + cfg.elCls
-    }
-    cfg.elCls = prefixCls + "button " + (cfg.elCls || "");
-    var b = (new ButtonType(S.mix({render:self.get("toolBarEl"), content:"<span " + 'class="' + prefixCls + "item " + prefixCls + id + '"></span' + ">", prefixCls:self.get("prefixCls") + "editor-", editor:self}, cfg))).render();
-    if(!cfg.content) {
-      var contentEl = b.get("el").one("span");
-      b.on("afterContentClsChange", function(e) {
-        contentEl[0].className = prefixCls + "item " + prefixCls + e.newVal
-      })
-    }
-    if(b.get("mode") === Editor.Mode.WYSIWYG_MODE) {
-      self.on("wysiwygMode", function() {
-        b.set("disabled", false)
-      });
-      self.on("sourceMode", function() {
-        b.set("disabled", true)
-      })
-    }
-    self.addControl(id + "/button", b);
-    return b
-  };
-  return Button
-});
-
+KISSY.add("editor/plugin/button",["util","editor","button"],function(j,c,k,e){var i=c("util"),g=c("editor"),h=c("button");g.prototype.addButton=function(c,a,f){void 0===f&&(f=h);var d=this.get("prefixCls")+"editor-toolbar-";a.elCls&&(a.elCls=d+a.elCls);a.elCls=d+"button "+(a.elCls||"");var b=(new f(i.mix({render:this.get("toolBarEl"),content:'<span class="'+d+"item "+d+c+'"></span>',prefixCls:this.get("prefixCls")+"editor-",editor:this},a))).render();if(!a.content){var e=b.get("el").one("span");b.on("afterContentClsChange",
+function(a){e[0].className=d+"item "+d+a.newVal})}b.get("mode")===g.Mode.WYSIWYG_MODE&&(this.on("wysiwygMode",function(){b.set("disabled",false)}),this.on("sourceMode",function(){b.set("disabled",true)}));this.addControl(c+"/button",b);return b};e.exports=h});
