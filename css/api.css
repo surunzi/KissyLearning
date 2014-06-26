@@ -10,6 +10,34 @@
     text-decoration: underline;
 }
 
+.api blockquote {
+    padding: 8px 5px;
+    margin: 5px 0;
+    border-left: 2px solid #09c;
+    font-size: 15px;
+    background-color: #f9f9f9;
+}
+
+.api blockquote p {
+    margin: 0;
+}
+
+.api code {
+    display: block;
+    background-color: #202020;
+    padding: 8px;
+    color: #e2e2e5;
+    font-size: 16px;
+}
+
+.api code .com {
+    color: #7e8aa2;
+}
+
+.api code .str, .api code .atv{
+    color: #1abc9c;
+}
+
 .api h3 {
     padding: 10px 0;
     color: #09c;
@@ -77,4 +105,8 @@
     padding: 5px 0;
     border-bottom: 1px solid #ccc;
     color: #000;
+}
+
+.api .wrapper {
+    padding: 0 15px;
 }

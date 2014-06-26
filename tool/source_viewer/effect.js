@@ -5,10 +5,11 @@ var $inputFunction = Node.one('#input-function'),
     $outputArea = Node.one('#code');
     
 // 初始化模块
-var moduleNames = ['anim', 'base', 'button', 'color', 'combobox', 'cookie',
-    'dd', 'dom', 'editor', 'filter-menu', 'io', 'json', 'menu', 'menubutton',
-    'node', 'overlay', 'path', 'promise', 'resizable', 'scroll-view', 'split-button',
-    'stylesheet', 'swf', 'tabs', 'toolbar', 'tree', 'xtemplate'],
+var moduleNames = ['anim', 'attribute', 'base', 'button', 'color', 'combobox', 'cookie',
+    'dd', 'dom', 'editor', 'feature', 'filter-menu', 'html-parser', 'io', 'json', 'menu', 'menubutton',
+    'navigation-view', 'node', 'overlay', 'path', 'promise', 'querystring', 
+    'resizable', 'router','scroll-view', 'split-button', 'stylesheet', 'swf',
+    'tabs', 'toolbar', 'tree', 'url', 'util', 'xtemplate'],
     tpl = new Xtemplate('<option value="{{name}}">{{name}}</option>'), append = '';
     
 for (var i = 0, len = moduleNames.length; i < len; i++) {
@@ -22,7 +23,7 @@ $inputModule.append(append);
 var editor = CodeMirror.fromTextArea($outputArea[0], {
     lineNumbers: true,
     lineWrapping: true,
-    indentUnit: 4,
+    indentUnit: 8,
     smartIndent: true,
     theme: 'solarized light'
 });
@@ -62,6 +63,17 @@ $inputFunction.on('keypress', function (e) {
         
     KISSY.use([moduleName], function (S, Module) {
         var functionDef = '// 抱歉，找不到该方法的定义╮(╯3╰)╭';
+        
+        // 如果输入'console'，则在控制台输出模块
+        if (functionName === 'console') {
+            console.dir(Module);
+            functionDef = '// 该模块已在控制在输出╰(￣▽￣)╮';
+        }
+        
+        // 如果输入'self'，查看模块的构造函数
+        if (functionName === 'self' && typeof Module === 'function') {
+            functionDef = Module.toString();
+        }
         
         // 如果模块中不只包含一个类
         if (functionName.indexOf('.') >= 0) {
