@@ -14,9 +14,9 @@
 
 &lt;p&gt;CSS3中的transform可以让我们很容易地对元素进行平移、旋转、缩放等操作，然而浏览器前缀给我们的使用增加了诸多不便。在没有使用CSS预处理的情况下，每次@keyframes都必须写上几份着实让人感到厌烦。而且利用@keyframes控制动画在某些情况下也并不是那么合适。Kissy的Anim模块支持跨浏览器的css transform，不仅使用起来就跟其它属性变换一样简单，同时还能够使用CSS3的transition来提高动画性能。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;new Anim(&#39;#object&#39;, {
-    &#39;left&#39;: 555,
-    &#39;transform&#39;: &#39;rotate(360deg)&#39;
+&lt;pre&gt;&lt;code&gt;new Anim('#object', {
+    'left': 555,
+    'transform': 'rotate(360deg)'
 }, 0.5).run();
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -26,20 +26,20 @@
 
 &lt;p&gt;Kissy可以在动画过程中随时暂停并重新开始动画。假如你是在开发一个具有多种动画效果的复杂Web应用，这个功能将会派上很大的用场。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;Node.one(&#39;#run&#39;).on(&#39;click&#39;, function () {
-    anim = new Anim(&#39;#object&#39;, {
-            &#39;left&#39;: 555,
-            &#39;transform&#39;: &#39;rotate(360deg)&#39;
+&lt;pre&gt;&lt;code&gt;Node.one('#run').on('click', function () {
+    anim = new Anim('#object', {
+            'left': 555,
+            'transform': 'rotate(360deg)'
     }, 5);
     anim.run();
 });
-Node.one(&#39;#stop&#39;).on(&#39;click&#39;, function () {
+Node.one('#stop').on('click', function () {
     anim.stop();
 });
-Node.one(&#39;#pause&#39;).on(&#39;click&#39;, function () {
+Node.one('#pause').on('click', function () {
     anim.pause();
 });
-Node.one(&#39;#resume&#39;).on(&#39;click&#39;, function () {
+Node.one('#resume').on('click', function () {
     anim.resume();
 });
 &lt;/code&gt;&lt;/pre&gt;
@@ -63,25 +63,25 @@ bounceBoth | cubic-bezier(p1x, p1y, p2x, p2y)（所有取值必须在[0,1]之间
 
 &lt;p&gt;什么是自定义动画呢？简单来说，就是你可以自行定义每个属性各自的变化效果，而不必全部都采用同一套方式。利用这个特性，你可以更加自由地控制动画的效果，比如下面这个，让透明度在0和1中进行改变，从而实现一闪一闪的效果：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;new Anim(&#39;#object&#39;, {
-    &#39;opacity&#39;: {
+&lt;pre&gt;&lt;code&gt;new Anim('#object', {
+    'opacity': {
         frame: function (anim, fx) {
             var dom = anim.node,
                 opacity = dom.style.opacity;
-            if (opacity === &#39;1&#39;) {
+            if (opacity === '1') {
                 dom.style.opacity = 0;
             } else {
                 dom.style.opacity = 1;
             }
         }
     },
-    &#39;left&#39;: {
+    'left': {
         value: 555,
-        easing: &#39;swing&#39;
+        easing: 'swing'
     },
-    &#39;transform&#39;: {
-        value: &#39;scale(0.01)&#39;,
-        easing: &#39;elasticBoth&#39;
+    'transform': {
+        value: 'scale(0.01)',
+        easing: 'elasticBoth'
     }
 }, 5).run();
 &lt;/code&gt;&lt;/pre&gt;
@@ -123,13 +123,13 @@ anim.run();
 &lt;pre&gt;&lt;code&gt;var A = Base.extend({
     constructor: function () {},
     run: function () {
-        console.log(&#39;a&#39;);
+        console.log('a');
     }
 });
 var B = Base.extend({
     constructor: function () {},
     run: function () {
-        console.log(&#39;b&#39;);
+        console.log('b');
     }
 });
 var C = Base.extend([A, B], {
@@ -143,18 +143,18 @@ c.run();
 &lt;pre&gt;&lt;code&gt;var A = Base.extend({
     constructor: function () {},
     run: function () {
-        console.log(&#39;a&#39;);
+        console.log('a');
     }
 });
 var B = Base.extend({
     constructor: function () {},
     run: function () {
-        console.log(&#39;b&#39;);
+        console.log('b');
     }
 });
 var C = Base.extend([A, B], {
     run: function () {
-        console.log(&#39;c&#39;);
+        console.log('c');
     }
 });
 var c = new C;
@@ -208,7 +208,7 @@ editor.unplug(bold);
             self = this,
             args = arguments;
         // 如果调用callSuper的对象本身就是function
-        if (typeof self === &#39;function&#39; &amp;amp;&amp;amp; self.__name__) {
+        if (typeof self === 'function' &amp;amp;&amp;amp; self.__name__) {
             method = self;
             obj = args[0];
             args = Array.prototype.slice.call(args, 1);
@@ -261,8 +261,8 @@ editor.unplug(bold);
 
 &lt;p&gt;其中name为数组，指明需要使用的模块，sandbox为匿名函数，第一个参数为S，传入KISSY全局对象，其他参数依次带入所载入的模块返回的对象。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;KISSY.use([&#39;node&#39;, &#39;io&#39;], function (S, Node, io) {
-    var ele = Node.one(&#39;#ele&#39;);
+&lt;pre&gt;&lt;code&gt;KISSY.use(['node', 'io'], function (S, Node, io) {
+    var ele = Node.one('#ele');
     ...
 });
 &lt;/code&gt;&lt;/pre&gt;
@@ -283,9 +283,9 @@ editor.unplug(bold);
         <description>&lt;p&gt;记得之前在Kissy的官网上，有人建议将依赖模块的声明放到前面去，这样看起来会比较方便些。官网提供的解决方法是：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;KISSY.add(function(S, require){
-    var A = require(&#39;a&#39;);
-    var B = require(&#39;b&#39;);
-    var C = require(&#39;c&#39;);
+    var A = require('a');
+    var B = require('b');
+    var C = require('c');
     // Your code...
 });
 &lt;/code&gt;&lt;/pre&gt;
@@ -314,7 +314,7 @@ editor.unplug(bold);
 
 &lt;p&gt;module-A.js&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;define([&#39;node&#39;, &#39;base&#39;], function (Node, Base) {
+&lt;pre&gt;&lt;code&gt;define(['node', 'base'], function (Node, Base) {
     ...
 });
 &lt;/code&gt;&lt;/pre&gt;
@@ -380,7 +380,7 @@ var c = new Circle(10, 10, 5);
     }
 }, {
     // 这里是类名（可选）
-    name: &#39;Geometry&#39;,
+    name: 'Geometry',
     // 类的属性，可使用默认的set和get方法，也可以自定义
     ATTRS: {
         // 在这里添加类的属性
@@ -410,7 +410,7 @@ var c = new Circle(10, 10, 5);
         ...
     }
 }, {
-    name: &#39;Circle&#39;,
+    name: 'Circle',
     ATTRS: {
         r: {
             value: 0
@@ -469,12 +469,12 @@ var c = new Circle(10, 10, 5);
     }
     ...
     ComboLoader.add = function (name, factory, config, argsLen) {
-        // KISSY.add(&#39;xx&#39;,[],function(){});
+        // KISSY.add('xx',[],function(){});
         if (argsLen === 3 &amp;amp;&amp;amp; Utils.isArray(factory)) {
             ...
         }
-        // KISSY.add(function(){}), KISSY.add(&#39;a&#39;), KISSY.add(function(){},{requires:[]})
-        if (typeof name === &#39;function&#39; || argsLen === 1) {
+        // KISSY.add(function(){}), KISSY.add('a'), KISSY.add(function(){},{requires:[]})
+        if (typeof name === 'function' || argsLen === 1) {
             ...
             addModule(name, factory, config);
         } else {
@@ -560,7 +560,7 @@ var c = new Circle(10, 10, 5);
     return;
     /* 最后可以返回结果供调用该模块的文件使用 */
 }, {
-    requires: [&#39;node&#39;] /* 可以加载多个该模块所依赖的模块，与函数的参数一一对应*/
+    requires: ['node'] /* 可以加载多个该模块所依赖的模块，与函数的参数一一对应*/
 });
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -592,7 +592,7 @@ var c = new Circle(10, 10, 5);
         stop: stop
     };
 }, {
-    requires: [&#39;node&#39;]
+    requires: ['node']
 });
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -604,9 +604,9 @@ var c = new Circle(10, 10, 5);
 
 &lt;p&gt;effect.js&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;KISSY.config(&#39;packages&#39;, {
-    &#39;myModule&#39;: {
-        base: window.location.href.replace(&#39;index.html&#39;, &#39;&#39;),
+&lt;pre&gt;&lt;code&gt;KISSY.config('packages', {
+    'myModule': {
+        base: window.location.href.replace('index.html', ''),
         ignorePackageNameInUri: true
     }
 });
@@ -625,10 +625,10 @@ var c = new Circle(10, 10, 5);
 &lt;p&gt;effect.js&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;KISSY.ready(function (S) {
-KISSY.use(&#39;node&#39;, function (S, Node) {
-    Node.one(&#39;#btn&#39;).on(&#39;click&#39;, function () {
+KISSY.use('node', function (S, Node) {
+    Node.one('#btn').on('click', function () {
         /* 点击按钮时加载snow模块并执行 */
-        KISSY.use(&#39;myModule/snow&#39;, function (S, snow) {
+        KISSY.use('myModule/snow', function (S, snow) {
             snow.begin();
         });
     });
@@ -686,7 +686,7 @@ $(function () {
 
 &lt;p&gt;Kissy:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;KISSY.use([&#39;node&#39;], function (S) {
+&lt;pre&gt;&lt;code&gt;KISSY.use(['node'], function (S) {
 S.ready(function (S) {
     var $ = S.all;
     /** jQuery风格代码 */
@@ -700,7 +700,7 @@ S.ready(function (S) {
 
 &lt;p&gt;如果想要使用ajax功能的话，可以写成下面的形式：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;KISSY.use([&#39;node&#39;, &#39;io&#39;], function (S) {
+&lt;pre&gt;&lt;code&gt;KISSY.use(['node', 'io'], function (S) {
 S.ready(function (S) {
     var $ = S.all,
         io = S.io,
