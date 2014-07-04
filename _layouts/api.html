@@ -1,7 +1,7 @@
 {% include header.html %}
 {% include nav.html %}
 
-<div id="page" data-feature="prettify"></div>
+<div id="page" data-feature="prettify,apiOverlay" data-url="{{ site.baseurl }}/api/"></div>
 
 <div class="api container">
     <div class="wrapper">
@@ -9,6 +9,11 @@
         {{ content }}
         <div id="post-disqus-container">
             <div id="disqus_thread"></div>
+        </div>
+    </div>
+    <div id="overlay">
+        <div class="center">
+            <div class="container"></div>
         </div>
     </div>
 </div>

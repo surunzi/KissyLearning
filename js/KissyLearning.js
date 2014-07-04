@@ -55,4 +55,24 @@ initFeature('prettify', function () {
     prettyPrint();
 });
 
+// API弹出框
+initFeature('apiOverlay', function () {
+    var $triggers = Node.all('.overlay'),
+        $overlay = Node.one('#overlay'),
+        $overlayInside = $overlay.one('#overlay .container');
+        url = $page.attr('data-url');
+    $triggers.on('click', function () {
+        $overlay.fadeIn(0.3);
+        var href = url + Node.one(this).attr('data-target') + '/';
+        S.use(['io'], function (S, Io) {
+            Io.get(href, '', function (data) {
+                $overlayInside.html(data);
+            });
+        }, 'html');
+    });
+    $overlay.on('click', function () {
+        $overlay.fadeOut(0.3);
+    });
+});
+
 });

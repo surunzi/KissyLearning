@@ -4,9 +4,9 @@ extracss: api
 title: Cookie
 ---
 
-|功能|cookie存取
-|模块名|cookie
-|模块实质|对象
+|功能|cookie存取|
+|模块名|cookie|
+|模块实质|对象|
 
 ### 函数
 

@@ -4,9 +4,9 @@ extracss: api
 title: Feature
 ---
 
-|功能|硬件环境关键特性检测
-|模块名|feature
-|模块实质|对象
+|功能|硬件环境关键特性检测|
+|模块名|feature|
+|模块实质|对象|
 
 ### 函数
 

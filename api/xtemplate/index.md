@@ -4,9 +4,9 @@ extracss: api
 title: Xtemplate
 ---
 
-|功能|富逻辑的 KISSY 模板引擎，兼容 mustache
-|模块名|xtemplate
-|模块实质|类
+|功能|富逻辑的 KISSY 模板引擎，兼容 mustache|
+|模块名|xtemplate|
+|模块实质|类|
 
 ### 构造函数
 

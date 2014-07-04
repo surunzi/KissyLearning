@@ -4,10 +4,10 @@ extracss: api
 title: Button
 ---
 
-|功能|用于快速创建具备常用功能的按钮对象
-|模块名|button
-|模块实质|类
-|父类|[Control]()
+|功能|用于快速创建具备常用功能的按钮对象|
+|模块名|button|
+|模块实质|类|
+|父类|[Control]()|
 
 ### 构造函数
 
@@ -45,7 +45,7 @@ config
 |describedby|String|按钮节点的 aria-describedby 属性值|
 |tooltip|String|按钮节点的 title 属性值|
 
-### 监听器
+### 事件
 
 <div class="function" markdown="1">
 
